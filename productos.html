@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catálogo de Productos - Atelier Minimal Store</title>
+  <meta name="description" content="Explora nuestro catálogo completo de productos minimalistas sostenibles.">
+  <link rel="stylesheet" href="./assets/base.css">
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+  <script src="./assets/main.js" defer></script>
+</head>
+<body>
+
+  <div class="announcement-bar">
+    ✨ Envíos gratis a todo el país en compras superiores a $50 | 100% Ecológico y Sostenible
+  </div>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo">ATELIER<span>.</span></a>
+      <nav class="main-nav">
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="productos.html" style="color: var(--color-green-dark); font-weight: 700;">Productos</a></li>
+          <li><a href="quienes-somos.html">Quiénes Somos</a></li>
+          <li><a href="contacto.html">Contacto</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <button class="icon-btn" aria-label="Buscar">
+          <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        </button>
+        <button class="icon-btn" aria-label="Carrito">
+          <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-header-banner">
+      <div class="container">
+        <h1 class="title-1">Nuestra Colección Completa</h1>
+        <h2 class="title-2">Diseños concebidos para transformar tu hogar</h2>
+        <p class="text-body" style="max-width: 600px; margin: 0.5rem auto 0 auto;">
+          Explora todas nuestras piezas minimalistas fabricadas con materiales sostenibles y tonos naturales.
+        </p>
+      </div>
+    </section>
+
+    <section class="section-best-sellers" style="padding-top: 2rem;">
+      <div class="container">
+        <!-- Toolbar & Filtros -->
+        <div class="catalog-toolbar">
+          <div class="filter-group">
+            <span class="text-body" style="font-weight: 600;">Filtrar por:</span>
+            <select class="select-custom">
+              <option>Todas las categorías</option>
+              <option>Decoración y Hogar</option>
+              <option>Textiles Orgánicos</option>
+              <option>Cuidado Personal</option>
+              <option>Accesorios</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <span class="text-body" style="font-weight: 600;">Ordenar por:</span>
+            <select class="select-custom">
+              <option>Más recientes</option>
+              <option>Precio: Menor a Mayor</option>
+              <option>Precio: Mayor a Menor</option>
+              <option>Más vendidos</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="products-grid">
+          <!-- Producto 1 -->
+          <article class="product-card">
+            <div class="placeholder-box">
+              <p>IMAGEN DEL PRODUCTO</p>
+              <span>Fotografía Jarrón Cerámica</span>
+            </div>
+            <div class="product-info">
+              <span class="product-category">Hogar & Estilo</span>
+              <h3 class="title-3">Jarrón de Cerámica Artesanal</h3>
+              <p class="text-body" style="font-size: 0.88rem;">Acabado mate suave en tono verde pastel.</p>
+              <div class="product-price">$45.00 USD</div>
+            </div>
+            <button class="btn btn-primary">Añadir al Carrito</button>
+          </article>
+
+          <!-- Producto 2 -->
+          <article class="product-card">
+            <div class="placeholder-box">
+              <p>IMAGEN DEL PRODUCTO</p>
+              <span>Fotografía Manta Lino</span>
+            </div>
+            <div class="product-info">
+              <span class="product-category">Textiles</span>
+              <h3 class="title-3">Manta de Lino Orgánico</h3>
+              <p class="text-body" style="font-size: 0.88rem;">Tejido artesanal ultra suave en marrón claro.</p>
+              <div class="product-price">$68.00 USD</div>
+            </div>
+            <button class="btn btn-primary">Añadir al Carrito</button>
+          </article>
+
+          <!-- Producto 3 -->
+          <article class="product-card">
+            <div class="placeholder-box">
+              <p>IMAGEN DEL PRODUCTO</p>
+              <span>Fotografía Diffusor</span>
+            </div>
+            <div class="product-info">
+              <span class="product-category">Bienestar</span>
+              <h3 class="title-3">Set de Diffusor Botánico</h3>
+              <p class="text-body" style="font-size: 0.88rem;">Aceites esenciales 100% orgánicos extraídos a mano.</p>
+              <div class="product-price">$34.00 USD</div>
+            </div>
+            <button class="btn btn-primary">Añadir al Carrito</button>
+          </article>
+
+          <!-- Producto 4 -->
+          <article class="product-card">
+            <div class="placeholder-box">
+              <p>IMAGEN DEL PRODUCTO</p>
+              <span>Fotografía Organizador Roble</span>
+            </div>
+            <div class="product-info">
+              <span class="product-category">Accesorios</span>
+              <h3 class="title-3">Organizador de Madera de Roble</h3>
+              <p class="text-body" style="font-size: 0.88rem;">Diseño geométrico limpio para escritorio o mesa.</p>
+              <div class="product-price">$52.00 USD</div>
+            </div>
+            <button class="btn btn-primary">Añadir al Carrito</button>
+          </article>
+
+          <!-- Producto 5 -->
+          <article class="product-card">
+            <div class="placeholder-box">
+              <p>IMAGEN DEL PRODUCTO</p>
+              <span>Fotografía Vela Aromática</span>
+            </div>
+            <div class="product-info">
+              <span class="product-category">Bienestar</span>
+              <h3 class="title-3">Vela de Cera de Soja Natural</h3>
+              <p class="text-body" style="font-size: 0.88rem;">Aroma a lavanda suave y pino silvestre.</p>
+              <div class="product-price">$28.00 USD</div>
+            </div>
+            <button class="btn btn-primary">Añadir al Carrito</button>
+          </article>
+
+          <!-- Producto 6 -->
+          <article class="product-card">
+            <div class="placeholder-box">
+              <p>IMAGEN DEL PRODUCTO</p>
+              <span>Fotografía Espejo Minimal</span>
+            </div>
+            <div class="product-info">
+              <span class="product-category">Decoración</span>
+              <h3 class="title-3">Espejo Marco de Bambú</h3>
+              <p class="text-body" style="font-size: 0.88rem;">Forma orgánica curva en acabado verde suave.</p>
+              <div class="product-price">$75.00 USD</div>
+            </div>
+            <button class="btn btn-primary">Añadir al Carrito</button>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <a href="index.html" class="logo" style="color: var(--color-white);">ATELIER<span style="color: var(--color-green-accent);">.</span></a>
+          <p style="margin-top: 1rem;">Creando objetos cotidianos con un enfoque minimalista, tonos armoniosos e inspiración natural.</p>
+        </div>
+        <div class="footer-col">
+          <h3 class="title-3">Navegación</h3>
+          <ul class="footer-links">
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="productos.html">Productos</a></li>
+            <li><a href="quienes-somos.html">Quiénes Somos</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3 class="title-3">Ayuda</h3>
+          <ul class="footer-links">
+            <li><a href="#">Preguntas Frecuentes</a></li>
+            <li><a href="#">Envíos y Devoluciones</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+            <li><a href="#">Términos y Condiciones</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3 class="title-3">Únete al Club</h3>
+          <p>Recibe noticias exclusivas y un 10% de descuento en tu primera compra.</p>
+          <form class="newsletter-form" onsubmit="event.preventDefault();">
+            <input type="email" class="newsletter-input" placeholder="Tu correo electrónico" required>
+            <button type="submit" class="btn btn-primary" style="padding: 0.7rem 1rem;">Suscribirme</button>
+          </form>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 Atelier Minimal Store. Todos los derechos reservados.</p>
+        <p>Diseñado para Shopify & GitHub Integration</p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
