@@ -1,0 +1,24 @@
+{
+  "sections": {
+    "collection_banner": {
+      "type": "category-menu",
+      "settings": {
+        "title_2": "Explora por Categorías",
+        "title_3": "Selecciona una categoría para ver sus productos",
+        "text_body": "Todas nuestras colecciones de diseño minimalista."
+      }
+    },
+    "product_grid": {
+      "type": "best-sellers",
+      "settings": {
+        "title_2": "Colección Completa",
+        "title_3": "Todos los productos",
+        "text_body": "Piezas pensadas para perdurar."
+      }
+    }
+  },
+  "order": [
+    "collection_banner",
+    "product_grid"
+  ]
+}

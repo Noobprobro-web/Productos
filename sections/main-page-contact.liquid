@@ -1,0 +1,72 @@
+<section class="page-header-banner">
+  <div class="container">
+    <h1 class="title-1">{{ page.title | default: "Contacto" }}</h1>
+    <h2 class="title-2">Estamos aquí para ayudarte</h2>
+  </div>
+</section>
+
+<div class="container contact-grid">
+  <div class="contact-info-card">
+    <div>
+      <h2 class="title-2" style="font-size: 1.6rem; margin-bottom: 0.5rem;">Información de Contacto</h2>
+      <p class="text-body">¿Tienes alguna pregunta sobre nuestros productos, envíos o pedidos personalizados? Responderemos en menos de 24 horas.</p>
+    </div>
+
+    <div class="contact-item">
+      <div class="contact-icon-wrapper">
+        {% render 'icon-search' %}
+      </div>
+      <div>
+        <h3 class="title-3" style="font-size: 1.05rem;">Correo Electrónico</h3>
+        <p class="text-body">{{ shop.email | default: "hola@atelierminimal.com" }}</p>
+      </div>
+    </div>
+
+    <div class="contact-item">
+      <div class="contact-icon-wrapper">
+        {% render 'icon-cart' %}
+      </div>
+      <div>
+        <h3 class="title-3" style="font-size: 1.05rem;">Ubicación Showroom</h3>
+        <p class="text-body">{{ shop.address.summary | default: "Calle Principal #45-12, Zona Design" }}</p>
+      </div>
+    </div>
+  </div>
+
+  {% form 'contact', class: 'contact-form' %}
+    {% if form.posted_successfully? %}
+      <p class="text-body" style="color: var(--color-green-dark); font-weight:600;">¡Gracias por contactarnos! Responderemos muy pronto.</p>
+    {% endif %}
+
+    <h2 class="title-2" style="font-size: 1.6rem; margin-bottom: 0.5rem;">Escríbenos</h2>
+    
+    <div class="form-group">
+      <label for="ContactFormName">Nombre Completo</label>
+      <input type="text" id="ContactFormName" name="contact[name]" class="form-control" placeholder="Ej. Ana María Pérez" required>
+    </div>
+
+    <div class="form-group">
+      <label for="ContactFormEmail">Correo Electrónico</label>
+      <input type="email" id="ContactFormEmail" name="contact[email]" class="form-control" placeholder="tu@correo.com" required>
+    </div>
+
+    <div class="form-group">
+      <label for="ContactFormMessage">Mensaje</label>
+      <textarea id="ContactFormMessage" name="contact[body]" class="form-control" rows="5" placeholder="¿En qué podemos ayudarte?" required></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Enviar Mensaje</button>
+  {% endform %}
+</div>
+
+{% schema %}
+{
+  "name": "Página de Contacto",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Página de Contacto"
+    }
+  ]
+}
+{% endschema %}

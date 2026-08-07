@@ -1,0 +1,10 @@
+{
+  "sections": {
+    "contact_content": {
+      "type": "main-page-contact"
+    }
+  },
+  "order": [
+    "contact_content"
+  ]
+}

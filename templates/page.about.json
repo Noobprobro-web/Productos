@@ -1,0 +1,10 @@
+{
+  "sections": {
+    "about_content": {
+      "type": "main-page-about"
+    }
+  },
+  "order": [
+    "about_content"
+  ]
+}

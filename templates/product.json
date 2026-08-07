@@ -1,0 +1,15 @@
+{
+  "sections": {
+    "product_detail": {
+      "type": "best-sellers",
+      "settings": {
+        "title_2": "Detalles del Producto",
+        "title_3": "Piezas Relacionadas",
+        "text_body": "Explora otros productos de nuestra colección."
+      }
+    }
+  },
+  "order": [
+    "product_detail"
+  ]
+}

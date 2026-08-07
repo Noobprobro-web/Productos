@@ -1,0 +1,132 @@
+<section class="page-header-banner">
+  <div class="container">
+    <h1 class="title-1">{{ page.title | default: "Quiénes Somos" }}</h1>
+    <h2 class="title-2">Diseño intencional para una vida más serena y consciente</h2>
+  </div>
+</section>
+
+<!-- SECCIÓN 1: INTRODUCCIÓN Y MANIFIESTO -->
+<section class="container about-hero">
+  <div class="hero-content">
+    <span class="hero-badge">Fundada en 2024</span>
+    <h2 class="title-2">{{ section.settings.intro_title | default: "Creemos en la belleza de lo esencial" }}</h2>
+    <p class="text-body">
+      {{ section.settings.intro_text_1 | default: "Atelier nació de la firme creencia de que nuestro entorno físico influye directamente en nuestro bienestar mental. Eliminamos el exceso para enfocarnos en líneas puras, materiales duraderos y tonalidades que calman los sentidos." }}
+    </p>
+    <p class="text-body">
+      {{ section.settings.intro_text_2 | default: "Nuestra paleta inspirada en verde suave y marrón tierra busca conectar tu espacio interior con la serenidad de la naturaleza." }}
+    </p>
+  </div>
+  <div class="hero-media">
+    {% if section.settings.intro_image != blank %}
+      <img src="{{ section.settings.intro_image | image_url: width: 600 }}" alt="{{ section.settings.intro_title | escape }}" loading="lazy">
+    {% else %}
+      <div class="placeholder-box" style="min-height: 380px;">
+        <p>IMAGEN DE NUESTRO TALLER</p>
+        <span>Fotografía artesanal / Historia de la marca</span>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+<!-- SECCIÓN 2: PILARES Y VALORES -->
+<section class="section-categories">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="title-2">Nuestros Pilares</h2>
+      <h3 class="title-3">Lo que guía cada decisión de diseño</h3>
+    </div>
+
+    <div class="values-grid">
+      <div class="value-card">
+        <div class="value-icon">
+          {% render 'icon-heart' %}
+        </div>
+        <h3 class="title-3">Sostenibilidad Real</h3>
+        <p class="text-body" style="font-size: 0.88rem; margin-top: 0.5rem;">Materiales 100% orgánicos, reciclables y de origen ético.</p>
+      </div>
+
+      <div class="value-card">
+        <div class="value-icon">
+          {% render 'icon-search' %}
+        </div>
+        <h3 class="title-3">Artesanía Detallada</h3>
+        <p class="text-body" style="font-size: 0.88rem; margin-top: 0.5rem;">Cada objeto pasa por un riguroso control de calidad antes de llegar a ti.</p>
+      </div>
+
+      <div class="value-card">
+        <div class="value-icon">
+          {% render 'icon-cart' %}
+        </div>
+        <h3 class="title-3">Diseño Atemporal</h3>
+        <p class="text-body" style="font-size: 0.88rem; margin-top: 0.5rem;">Piezas pensadas para trascender modas pasajeras y perdurar en el tiempo.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECCIÓN 3: LÍNEA DE TIEMPO / TRAYECTORIA -->
+<section class="section-reviews" style="background-color: var(--color-bg);">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="title-2">Nuestra Trayectoria</h2>
+      <h3 class="title-3">El camino hacia la simplicidad intencional</h3>
+    </div>
+
+    <div class="timeline-grid">
+      <div class="timeline-card">
+        <div class="timeline-year">2024</div>
+        <h3 class="title-3">El Nacimiento</h3>
+        <p class="text-body" style="font-size:0.88rem; margin-top:0.4rem;">Comenzamos con una colección cápsula de 10 jarrones de cerámica modelados a mano.</p>
+      </div>
+
+      <div class="timeline-card">
+        <div class="timeline-year">2025</div>
+        <h3 class="title-3">Lino & Bambú</h3>
+        <p class="text-body" style="font-size:0.88rem; margin-top:0.4rem;">Expandimos hacia textiles 100% orgánicos y accesorios de bambú sustentable.</p>
+      </div>
+
+      <div class="timeline-card">
+        <div class="timeline-year">2026</div>
+        <h3 class="title-3">Universo Atelier</h3>
+        <p class="text-body" style="font-size:0.88rem; margin-top:0.4rem;">Llegamos a 20 categorías integrales con 400 productos en tonos pastel verde y tierra.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Quiénes Somos / Manifiesto",
+  "settings": [
+    {
+      "type": "text",
+      "id": "intro_title",
+      "label": "Título Principal",
+      "default": "Creemos en la belleza de lo esencial"
+    },
+    {
+      "type": "textarea",
+      "id": "intro_text_1",
+      "label": "Párrafo 1",
+      "default": "Atelier nació de la firme creencia de que nuestro entorno físico influye directamente en nuestro bienestar mental."
+    },
+    {
+      "type": "textarea",
+      "id": "intro_text_2",
+      "label": "Párrafo 2",
+      "default": "Nuestra paleta inspirada en verde suave y marrón tierra busca conectar tu espacio interior con la serenidad de la naturaleza."
+    },
+    {
+      "type": "image_picker",
+      "id": "intro_image",
+      "label": "Imagen del Taller"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Quiénes Somos / Manifiesto"
+    }
+  ]
+}
+{% endschema %}

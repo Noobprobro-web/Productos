@@ -1,0 +1,12 @@
+{
+  "general": {
+    "search": {
+      "placeholder": "Buscar 400 productos..."
+    },
+    "cart": {
+      "title": "Tu Carrito de Compras",
+      "empty": "Tu carrito está vacío actualmente.",
+      "checkout": "Proceder al Pago"
+    }
+  }
+}
