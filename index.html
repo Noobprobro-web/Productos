@@ -7,7 +7,9 @@
   <meta name="description" content="Descubre productos exclusivos en nuestra tienda minimalista con diseño inspirado en Atelier.">
   <link rel="stylesheet" href="./assets/base.css">
   
-  <!-- GSAP & ScrollTrigger Libraries CDN -->
+  <!-- GSAP & Store Engine Libraries -->
+  <script src="./assets/data-store.js"></script>
+  <script src="./assets/store-features.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
   <script src="./assets/main.js" defer></script>
@@ -144,7 +146,7 @@
               <p class="text-body" style="font-size: 0.88rem;">Acabado mate suave en tono verde pastel.</p>
               <div class="product-price">$45.00 USD</div>
             </div>
-            <button class="btn btn-primary">Añadir al Carrito</button>
+            <button class="btn btn-primary" onclick="window.STORE_CART.add(101); openCartModal();">Añadir al Carrito</button>
           </article>
 
           <!-- Tarjeta de Producto 2 -->
@@ -159,7 +161,7 @@
               <p class="text-body" style="font-size: 0.88rem;">Tejido artesanal ultra suave en marrón claro.</p>
               <div class="product-price">$68.00 USD</div>
             </div>
-            <button class="btn btn-primary">Añadir al Carrito</button>
+            <button class="btn btn-primary" onclick="window.STORE_CART.add(121); openCartModal();">Añadir al Carrito</button>
           </article>
 
           <!-- Tarjeta de Producto 3 -->
@@ -174,7 +176,7 @@
               <p class="text-body" style="font-size: 0.88rem;">Aceites esenciales 100% orgánicos extraídos a mano.</p>
               <div class="product-price">$34.00 USD</div>
             </div>
-            <button class="btn btn-primary">Añadir al Carrito</button>
+            <button class="btn btn-primary" onclick="window.STORE_CART.add(141); openCartModal();">Añadir al Carrito</button>
           </article>
 
           <!-- Tarjeta de Producto 4 -->
@@ -189,69 +191,44 @@
               <p class="text-body" style="font-size: 0.88rem;">Diseño geométrico limpio para escritorio o mesa.</p>
               <div class="product-price">$52.00 USD</div>
             </div>
-            <button class="btn btn-primary">Añadir al Carrito</button>
+            <button class="btn btn-primary" onclick="window.STORE_CART.add(161); openCartModal();">Añadir al Carrito</button>
           </article>
         </div>
       </div>
     </section>
 
-    <!-- SECCIÓN 4: MENÚ PARA ACCEDER A LAS CATEGORÍAS -->
+    <!-- SECCIÓN 4: MENÚ DE 20 CATEGORÍAS COMPLETO -->
     <section id="categorias" class="section-categories">
       <div class="container">
         <div class="section-header">
-          <h2 class="title-2">Explora por Categorías</h2>
-          <h3 class="title-3">Encuentra exactamente lo que necesitas para tu espacio</h3>
-          <p class="text-body">Navega a través de nuestras colecciones diseñadas minuciosamente.</p>
+          <h2 class="title-2">Explora Nuestras 20 Categorías</h2>
+          <h3 class="title-3">20 productos meticulosamente seleccionados por cada línea</h3>
+          <p class="text-body">Navega a través de nuestro universo completo de 400 productos sostenibles.</p>
         </div>
 
-        <div class="categories-grid">
-          <!-- Categoría 1 -->
-          <div class="category-card">
-            <div class="placeholder-box">
-              <p>IMAGEN DE LA CATEGORÍA</p>
-              <span>Fondo de la sección / Banner categoría 1</span>
-            </div>
-            <div class="category-footer">
-              <div>
-                <h3 class="title-3">Decoración y Hogar</h3>
-                <p class="text-body" style="font-size: 0.85rem;">12 Productos</p>
-              </div>
-              <a href="#" class="btn btn-outline" style="padding: 0.5rem 1rem;">Ver Más →</a>
-            </div>
-          </div>
+        <div id="indexCategoriesGrid" class="categories-grid-extended">
+          <!-- Inyectado por JS o render estático -->
+        </div>
 
-          <!-- Categoría 2 -->
-          <div class="category-card">
-            <div class="placeholder-box">
-              <p>IMAGEN DE LA CATEGORÍA</p>
-              <span>Fondo de la sección / Banner categoría 2</span>
-            </div>
-            <div class="category-footer">
-              <div>
-                <h3 class="title-3">Cuidado Personal</h3>
-                <p class="text-body" style="font-size: 0.85rem;">8 Productos</p>
-              </div>
-              <a href="#" class="btn btn-outline" style="padding: 0.5rem 1rem;">Ver Más →</a>
-            </div>
-          </div>
-
-          <!-- Categoría 3 -->
-          <div class="category-card">
-            <div class="placeholder-box">
-              <p>IMAGEN DE LA CATEGORÍA</p>
-              <span>Fondo de la sección / Banner categoría 3</span>
-            </div>
-            <div class="category-footer">
-              <div>
-                <h3 class="title-3">Textiles Esenciales</h3>
-                <p class="text-body" style="font-size: 0.85rem;">15 Productos</p>
-              </div>
-              <a href="#" class="btn btn-outline" style="padding: 0.5rem 1rem;">Ver Más →</a>
-            </div>
-          </div>
+        <div style="text-align: center; margin-top: 3rem;">
+          <a href="productos.html" class="btn btn-primary">Ver Catálogo Completo (400 Productos) →</a>
         </div>
       </div>
     </section>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const catGrid = document.getElementById("indexCategoriesGrid");
+        if (window.STORE_CATEGORIES && catGrid) {
+          catGrid.innerHTML = window.STORE_CATEGORIES.map(c => `
+            <div class="category-chip-card" onclick="location.href='productos.html?cat=${c.id}'">
+              <h3 class="title-3" style="font-size:1.05rem;">${c.name}</h3>
+              <p class="text-body" style="font-size:0.8rem;">20 Productos disponible</p>
+            </div>
+          `).join('');
+        }
+      });
+    </script>
 
     <!-- SECCIÓN 5: RESEÑAS DE LA WEB -->
     <section id="reseñas" class="section-reviews">

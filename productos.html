@@ -3,10 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Catálogo de Productos - Atelier Minimal Store</title>
-  <meta name="description" content="Explora nuestro catálogo completo de productos minimalistas sostenibles.">
+  <title>Catálogo Completo (400 Productos) - Atelier Minimal Store</title>
+  <meta name="description" content="Explora las 20 categorías y 400 productos minimalistas sostenibles de Atelier.">
   <link rel="stylesheet" href="./assets/base.css">
   
+  <script src="./assets/data-store.js"></script>
+  <script src="./assets/store-features.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
   <script src="./assets/main.js" defer></script>
@@ -23,7 +25,7 @@
       <nav class="main-nav">
         <ul>
           <li><a href="index.html">Inicio</a></li>
-          <li><a href="productos.html" style="color: var(--color-green-dark); font-weight: 700;">Productos</a></li>
+          <li><a href="productos.html" style="color: var(--color-green-dark); font-weight: 700;">Productos (400)</a></li>
           <li><a href="quienes-somos.html">Quiénes Somos</a></li>
           <li><a href="contacto.html">Contacto</a></li>
         </ul>
@@ -42,129 +44,40 @@
   <main>
     <section class="page-header-banner">
       <div class="container">
-        <h1 class="title-1">Nuestra Colección Completa</h1>
-        <h2 class="title-2">Diseños concebidos para transformar tu hogar</h2>
-        <p class="text-body" style="max-width: 600px; margin: 0.5rem auto 0 auto;">
-          Explora todas nuestras piezas minimalistas fabricadas con materiales sostenibles y tonos naturales.
-        </p>
+        <h1 class="title-1">Colección Completa: 400 Productos</h1>
+        <h2 class="title-2">Explora nuestras 20 categorías concebidas para transformar tu hogar</h2>
       </div>
     </section>
 
     <section class="section-best-sellers" style="padding-top: 2rem;">
       <div class="container">
-        <!-- Toolbar & Filtros -->
+        <!-- Toolbar & Filtros Dínámicos -->
         <div class="catalog-toolbar">
           <div class="filter-group">
-            <span class="text-body" style="font-weight: 600;">Filtrar por:</span>
-            <select class="select-custom">
-              <option>Todas las categorías</option>
-              <option>Decoración y Hogar</option>
-              <option>Textiles Orgánicos</option>
-              <option>Cuidado Personal</option>
-              <option>Accesorios</option>
+            <span class="text-body" style="font-weight: 600;">Categoría:</span>
+            <select id="categoryFilter" class="select-custom" onchange="filterAndPaginate(1)">
+              <option value="all">Todas las 20 Categorías (400 Productos)</option>
             </select>
           </div>
           <div class="filter-group">
-            <span class="text-body" style="font-weight: 600;">Ordenar por:</span>
-            <select class="select-custom">
-              <option>Más recientes</option>
-              <option>Precio: Menor a Mayor</option>
-              <option>Precio: Mayor a Menor</option>
-              <option>Más vendidos</option>
+            <span class="text-body" style="font-weight: 600;">Ordenar:</span>
+            <select id="sortFilter" class="select-custom" onchange="filterAndPaginate(1)">
+              <option value="featured">Recomendados</option>
+              <option value="price-asc">Precio: Menor a Mayor</option>
+              <option value="price-desc">Precio: Mayor a Menor</option>
+              <option value="name-asc">Nombre A-Z</option>
             </select>
           </div>
         </div>
 
-        <div class="products-grid">
-          <!-- Producto 1 -->
-          <article class="product-card">
-            <div class="placeholder-box">
-              <p>IMAGEN DEL PRODUCTO</p>
-              <span>Fotografía Jarrón Cerámica</span>
-            </div>
-            <div class="product-info">
-              <span class="product-category">Hogar & Estilo</span>
-              <h3 class="title-3">Jarrón de Cerámica Artesanal</h3>
-              <p class="text-body" style="font-size: 0.88rem;">Acabado mate suave en tono verde pastel.</p>
-              <div class="product-price">$45.00 USD</div>
-            </div>
-            <button class="btn btn-primary">Añadir al Carrito</button>
-          </article>
+        <!-- Grid Dínámico -->
+        <div id="catalogProductsGrid" class="products-grid">
+          <!-- Inyectado por JS -->
+        </div>
 
-          <!-- Producto 2 -->
-          <article class="product-card">
-            <div class="placeholder-box">
-              <p>IMAGEN DEL PRODUCTO</p>
-              <span>Fotografía Manta Lino</span>
-            </div>
-            <div class="product-info">
-              <span class="product-category">Textiles</span>
-              <h3 class="title-3">Manta de Lino Orgánico</h3>
-              <p class="text-body" style="font-size: 0.88rem;">Tejido artesanal ultra suave en marrón claro.</p>
-              <div class="product-price">$68.00 USD</div>
-            </div>
-            <button class="btn btn-primary">Añadir al Carrito</button>
-          </article>
-
-          <!-- Producto 3 -->
-          <article class="product-card">
-            <div class="placeholder-box">
-              <p>IMAGEN DEL PRODUCTO</p>
-              <span>Fotografía Diffusor</span>
-            </div>
-            <div class="product-info">
-              <span class="product-category">Bienestar</span>
-              <h3 class="title-3">Set de Diffusor Botánico</h3>
-              <p class="text-body" style="font-size: 0.88rem;">Aceites esenciales 100% orgánicos extraídos a mano.</p>
-              <div class="product-price">$34.00 USD</div>
-            </div>
-            <button class="btn btn-primary">Añadir al Carrito</button>
-          </article>
-
-          <!-- Producto 4 -->
-          <article class="product-card">
-            <div class="placeholder-box">
-              <p>IMAGEN DEL PRODUCTO</p>
-              <span>Fotografía Organizador Roble</span>
-            </div>
-            <div class="product-info">
-              <span class="product-category">Accesorios</span>
-              <h3 class="title-3">Organizador de Madera de Roble</h3>
-              <p class="text-body" style="font-size: 0.88rem;">Diseño geométrico limpio para escritorio o mesa.</p>
-              <div class="product-price">$52.00 USD</div>
-            </div>
-            <button class="btn btn-primary">Añadir al Carrito</button>
-          </article>
-
-          <!-- Producto 5 -->
-          <article class="product-card">
-            <div class="placeholder-box">
-              <p>IMAGEN DEL PRODUCTO</p>
-              <span>Fotografía Vela Aromática</span>
-            </div>
-            <div class="product-info">
-              <span class="product-category">Bienestar</span>
-              <h3 class="title-3">Vela de Cera de Soja Natural</h3>
-              <p class="text-body" style="font-size: 0.88rem;">Aroma a lavanda suave y pino silvestre.</p>
-              <div class="product-price">$28.00 USD</div>
-            </div>
-            <button class="btn btn-primary">Añadir al Carrito</button>
-          </article>
-
-          <!-- Producto 6 -->
-          <article class="product-card">
-            <div class="placeholder-box">
-              <p>IMAGEN DEL PRODUCTO</p>
-              <span>Fotografía Espejo Minimal</span>
-            </div>
-            <div class="product-info">
-              <span class="product-category">Decoración</span>
-              <h3 class="title-3">Espejo Marco de Bambú</h3>
-              <p class="text-body" style="font-size: 0.88rem;">Forma orgánica curva en acabado verde suave.</p>
-              <div class="product-price">$75.00 USD</div>
-            </div>
-            <button class="btn btn-primary">Añadir al Carrito</button>
-          </article>
+        <!-- Paginador -->
+        <div id="paginationWrapper" class="pagination-wrapper">
+          <!-- Inyectado por JS -->
         </div>
       </div>
     </section>
@@ -210,6 +123,74 @@
       </div>
     </div>
   </footer>
+
+  <script>
+    let currentPage = 1;
+    const itemsPerPage = 12;
+
+    document.addEventListener("DOMContentLoaded", () => {
+      // Poblar selector de categorías
+      const catSelect = document.getElementById("categoryFilter");
+      if (window.STORE_CATEGORIES && catSelect) {
+        window.STORE_CATEGORIES.forEach(c => {
+          const opt = document.createElement("option");
+          opt.value = c.id;
+          opt.textContent = `${c.name} (20 prods)`;
+          catSelect.appendChild(opt);
+        });
+      }
+      filterAndPaginate(1);
+    });
+
+    function filterAndPaginate(page = 1) {
+      currentPage = page;
+      const catVal = document.getElementById("categoryFilter").value;
+      const sortVal = document.getElementById("sortFilter").value;
+
+      let list = [...window.STORE_PRODUCTS];
+
+      if (catVal !== "all") {
+        list = list.filter(p => p.categoryId === catVal);
+      }
+
+      if (sortVal === "price-asc") {
+        list.sort((a, b) => a.price - b.price);
+      } else if (sortVal === "price-desc") {
+        list.sort((a, b) => b.price - a.price);
+      } else if (sortVal === "name-asc") {
+        list.sort((a, b) => a.title.localeCompare(b.title));
+      }
+
+      const totalPages = Math.ceil(list.length / itemsPerPage);
+      const start = (currentPage - 1) * itemsPerPage;
+      const paginatedList = list.slice(start, start + itemsPerPage);
+
+      const grid = document.getElementById("catalogProductsGrid");
+      grid.innerHTML = paginatedList.map(product => `
+        <article class="product-card">
+          <div class="placeholder-box">
+            <p>IMAGEN DE PRODUCTO</p>
+            <span>${product.categoryName}</span>
+          </div>
+          <div class="product-info">
+            <span class="product-category">${product.categoryName}</span>
+            <h3 class="title-3">${product.title}</h3>
+            <p class="text-body" style="font-size: 0.88rem;">${product.description}</p>
+            <div class="product-price">${product.priceFormatted}</div>
+          </div>
+          <button class="btn btn-primary" onclick="window.STORE_CART.add(${product.id}); openCartModal();">Añadir al Carrito</button>
+        </article>
+      `).join('');
+
+      // Paginador
+      const pagWrapper = document.getElementById("paginationWrapper");
+      let pagHTML = '';
+      for (let i = 1; i <= totalPages; i++) {
+        pagHTML += `<button class="page-btn ${i === currentPage ? 'active' : ''}" onclick="filterAndPaginate(${i})">${i}</button>`;
+      }
+      pagWrapper.innerHTML = pagHTML;
+    }
+  </script>
 
 </body>
 </html>
