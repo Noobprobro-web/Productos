@@ -9,57 +9,39 @@
     <div class="reviews-grid">
       {% for block in section.blocks %}
         <article class="review-card" {{ block.shopify_attributes }}>
-          <div class="stars">★★★★★</div>
-          <h3 class="title-3">{{ block.settings.title_3 | default: "Excelente Experiencia" }}</h3>
-          <p class="review-text">"{{ block.settings.review_text | default: "El producto llegó a tiempo y la calidad es insuperable. Totalmente recomendado." }}"</p>
+          <div class="stars">
+            {% assign rating = block.settings.star_rating | default: 5 %}
+            {% for i in (1..rating) %}★{% endfor %}
+          </div>
+          <h3 class="title-3">{{ block.settings.title_3 | default: "Calidad y elegancia pura" }}</h3>
+          <p class="review-text">"{{ block.settings.review_text | default: "El producto superó mis expectativas. El tono pastel verde es idéntico a las fotos." }}"</p>
           <div class="author-info">
-            <div class="author-avatar">{{ block.settings.author_initials | default: "CL" }}</div>
+            {% if block.settings.author_image != blank %}
+              <img src="{{ block.settings.author_image | image_url: width: 100 }}" alt="{{ block.settings.author_name }}" style="width: 42px; height: 42px; border-radius: 50%; object-fit: cover;">
+            {% else %}
+              <div class="author-avatar">{{ block.settings.author_initials | default: "MC" }}</div>
+            {% endif %}
             <div class="author-details">
-              <p>{{ block.settings.author_name | default: "Cliente Satisfecho" }}</p>
-              <span>{{ block.settings.author_badge | default: "Cliente Verificado" }}</span>
+              <p>{{ block.settings.author_name | default: "Cliente Verificado" }}</p>
+              <span>{{ block.settings.author_badge | default: "Comprador Verificado" }}</span>
             </div>
           </div>
         </article>
       {% else %}
-        <!-- Fallback static reviews -->
-        <article class="review-card">
-          <div class="stars">★★★★★</div>
-          <h3 class="title-3">"Calidad y elegancia pura"</h3>
-          <p class="review-text">"El jarrón de cerámica superó mis expectativas. El tono verde pastel es exactamente como en las fotos y le dio un aire cálido y minimalista a mi sala."</p>
-          <div class="author-info">
-            <div class="author-avatar">MC</div>
-            <div class="author-details">
-              <p>María Camila R.</p>
-              <span>Cliente Verificado</span>
+        {% for i in (1..3) %}
+          <article class="review-card">
+            <div class="stars">★★★★★</div>
+            <h3 class="title-3">Reseña Destacada {{ i }}</h3>
+            <p class="review-text">"Excelente calidad y diseño minimalista en tonos pastel. Recomendado 100%."</p>
+            <div class="author-info">
+              <div class="author-avatar">CL</div>
+              <div class="author-details">
+                <p>Cliente {{ i }}</p>
+                <span>Cliente Verificado</span>
+              </div>
             </div>
-          </div>
-        </article>
-
-        <article class="review-card">
-          <div class="stars">★★★★★</div>
-          <h3 class="title-3">"Textiles increíbles"</h3>
-          <p class="review-text">"Compré la manta de lino y no puedo estar más contento. El color marrón suave combina perfecto con todo y la textura es extremadamente suave."</p>
-          <div class="author-info">
-            <div class="author-avatar">JG</div>
-            <div class="author-details">
-              <p>Javier G.</p>
-              <span>Cliente Verificado</span>
-            </div>
-          </div>
-        </article>
-
-        <article class="review-card">
-          <div class="stars">★★★★★</div>
-          <h3 class="title-3">"Excelente atención y empaque"</h3>
-          <p class="review-text">"El envío fue rapidísimo y el empaque ecológico un 10/10. Da gusto comprar marcas que cuidan cada detalle visual y ambiental."</p>
-          <div class="author-info">
-            <div class="author-avatar">SL</div>
-            <div class="author-details">
-              <p>Sofia L.</p>
-              <span>Cliente Verificado</span>
-            </div>
-          </div>
-        </article>
+          </article>
+        {% endfor %}
       {% endfor %}
     </div>
   </div>
@@ -91,37 +73,51 @@
   "blocks": [
     {
       "type": "review_item",
-      "name": "Reseña de Cliente",
+      "name": "Reseña Editable",
       "settings": [
+        {
+          "type": "range",
+          "id": "star_rating",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "default": 5,
+          "label": "Valoración en Estrellas"
+        },
         {
           "type": "text",
           "id": "title_3",
-          "label": "Título 3 de la reseña",
-          "default": "Calidad insuperable"
+          "label": "Título de la Reseña",
+          "default": "Calidad y elegancia pura"
         },
         {
           "type": "textarea",
           "id": "review_text",
-          "label": "Contenido de la reseña",
-          "default": "Me encantó el producto. La atención al cliente fue fantástica."
+          "label": "Contenido de la Reseña",
+          "default": "El producto superó mis expectativas. El tono pastel es idéntico a las fotos."
         },
         {
           "type": "text",
           "id": "author_name",
-          "label": "Nombre del cliente",
-          "default": "Laura G."
+          "label": "Nombre del Cliente",
+          "default": "María Camila R."
         },
         {
           "type": "text",
           "id": "author_initials",
-          "label": "Iniciales para Avatar",
-          "default": "LG"
+          "label": "Iniciales para Avatar (si no hay foto)",
+          "default": "MC"
+        },
+        {
+          "type": "image_picker",
+          "id": "author_image",
+          "label": "Foto del Cliente (Opcional)"
         },
         {
           "type": "text",
           "id": "author_badge",
-          "label": "Etiqueta del cliente",
-          "default": "Comprador Verificado"
+          "label": "Etiqueta del Cliente",
+          "default": "Cliente Verificado"
         }
       ]
     }

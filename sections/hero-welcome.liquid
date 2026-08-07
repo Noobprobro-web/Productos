@@ -2,17 +2,17 @@
   <div class="container hero-grid">
     <div class="hero-content">
       {% if section.settings.badge != blank %}
-        <span class="hero-badge">{{ section.settings.badge }}</span>
+        <span class="hero-badge gsap-hero-badge">{{ section.settings.badge }}</span>
       {% endif %}
       
-      <h1 class="title-1">{{ section.settings.title_1 | default: "Diseño Minimalista para tu Estilo de Vida" }}</h1>
-      <h2 class="title-2">{{ section.settings.title_2 | default: "Crea espacios serenos con nuestra nueva línea de productos sostenibles." }}</h2>
+      <h1 class="title-1 gsap-hero-title1">{{ section.settings.title_1 | default: "Diseño Minimalista para tu Estilo de Vida" }}</h1>
+      <h2 class="title-2 gsap-hero-title2">{{ section.settings.title_2 | default: "Crea espacios serenos con nuestra nueva línea de productos sostenibles." }}</h2>
       
-      <p class="text-body">
+      <p class="text-body gsap-hero-text">
         {{ section.settings.text_body | default: "Diseñamos objetos pensados para perdurar. Cada pieza combina funcionalidad pura y estética natural para transformar tu día a día en una experiencia de calma." }}
       </p>
 
-      <div style="margin-top: 1rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+      <div class="gsap-hero-cta" style="margin-top: 1rem; display: flex; gap: 1rem; flex-wrap: wrap;">
         {% if section.settings.btn_1_text != blank %}
           <a href="{{ section.settings.btn_1_link | default: '#mas-vendidos' }}" class="btn btn-primary">{{ section.settings.btn_1_text }}</a>
         {% endif %}
@@ -22,7 +22,7 @@
       </div>
     </div>
 
-    <div class="hero-media">
+    <div class="hero-media gsap-hero-media">
       {% if section.settings.image != blank %}
         <img src="{{ section.settings.image | image_url: width: 800 }}" alt="{{ section.settings.title_1 | escape }}" loading="eager" width="800" height="600">
       {% else %}
@@ -39,6 +39,10 @@
 {
   "name": "1. Imagen & Textos Hero",
   "settings": [
+    {
+      "type": "header",
+      "content": "Encabezados y Contenido"
+    },
     {
       "type": "text",
       "id": "badge",
@@ -58,15 +62,23 @@
       "default": "Crea espacios serenos con nuestra nueva línea de productos sostenibles."
     },
     {
-      "type": "textarea",
+      "type": "richtext",
       "id": "text_body",
-      "label": "Texto Informativo",
-      "default": "Diseñamos objetos pensados para perdurar. Cada pieza combina funcionalidad pura y estética natural para transformar tu día a día en una experiencia de calma."
+      "label": "Texto Informativo Enriquecido",
+      "default": "<p>Diseñamos objetos pensados para perdurar. Cada pieza combina funcionalidad pura y estética natural para transformar tu día a día en una experiencia de calma.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Imagen Principal"
     },
     {
       "type": "image_picker",
       "id": "image",
-      "label": "Imagen de bienvenida"
+      "label": "Imagen de Bienvenida (Recomendado 800x600px)"
+    },
+    {
+      "type": "header",
+      "content": "Botones de Llamada a la Acción (CTA)"
     },
     {
       "type": "text",

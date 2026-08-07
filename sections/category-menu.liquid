@@ -6,68 +6,55 @@
       <p class="text-body">{{ section.settings.text_body | default: "Navega a través de nuestras colecciones diseñadas minuciosamente." }}</p>
     </div>
 
-    <div class="categories-grid">
+    <div class="categories-grid-extended">
       {% for block in section.blocks %}
         <div class="category-card" {{ block.shopify_attributes }}>
-          {% if block.settings.image != blank %}
-            <img src="{{ block.settings.image | image_url: width: 600 }}" alt="{{ block.settings.title_3 }}" loading="lazy" style="border-radius: var(--radius-md); height: 200px; object-fit: cover;">
+          {% if block.settings.collection.image != blank %}
+            <img src="{{ block.settings.collection.image | image_url: width: 600 }}" alt="{{ block.settings.collection.title }}" loading="lazy" style="border-radius: var(--radius-md); height: 180px; object-fit: cover; width:100%;">
+          {% elsif block.settings.custom_image != blank %}
+            <img src="{{ block.settings.custom_image | image_url: width: 600 }}" alt="{{ block.settings.title_3 }}" loading="lazy" style="border-radius: var(--radius-md); height: 180px; object-fit: cover; width:100%;">
           {% else %}
-            <div class="placeholder-box">
-              <p>IMAGEN DE LA CATEGORÍA</p>
-              <span>Fondo de la sección / Banner {{ block.settings.title_3 }}</span>
+            <div class="placeholder-box" style="min-height: 180px;">
+              <p>IMAGEN CATEGORÍA</p>
+              <span>{{ block.settings.title_3 | default: block.settings.collection.title }}</span>
             </div>
           {% endif %}
+          
           <div class="category-footer">
             <div>
-              <h3 class="title-3">{{ block.settings.title_3 | default: "Nombre Categoría" }}</h3>
+              <h3 class="title-3">{{ block.settings.title_3 | default: block.settings.collection.title | default: "Nombre Categoría" }}</h3>
               <p class="text-body" style="font-size: 0.85rem;">{{ block.settings.item_count_text | default: "Colección Destacada" }}</p>
             </div>
-            <a href="{{ block.settings.link | default: '#' }}" class="btn btn-outline" style="padding: 0.5rem 1rem;">Ver Más →</a>
+            <a href="{{ block.settings.collection.url | default: block.settings.link | default: '#' }}" class="btn btn-outline" style="padding: 0.5rem 1rem;">Ver →</a>
           </div>
         </div>
       {% else %}
-        <!-- Fallback static blocks -->
-        <div class="category-card">
-          <div class="placeholder-box">
-            <p>IMAGEN DE LA CATEGORÍA</p>
-            <span>Fondo de la sección / Banner categoría 1</span>
-          </div>
-          <div class="category-footer">
-            <div>
-              <h3 class="title-3">Decoración y Hogar</h3>
-              <p class="text-body" style="font-size: 0.85rem;">12 Productos</p>
+        <!-- Fallback static blocks for editor preview -->
+        {% for i in (1..6) %}
+          <div class="category-card">
+            <div class="placeholder-box" style="min-height: 180px;">
+              <p>IMAGEN CATEGORÍA</p>
+              <span>Banner categoría {{ i }}</span>
             </div>
-            <a href="#" class="btn btn-outline" style="padding: 0.5rem 1rem;">Ver Más →</a>
-          </div>
-        </div>
-        <div class="category-card">
-          <div class="placeholder-box">
-            <p>IMAGEN DE LA CATEGORÍA</p>
-            <span>Fondo de la sección / Banner categoría 2</span>
-          </div>
-          <div class="category-footer">
-            <div>
-              <h3 class="title-3">Cuidado Personal</h3>
-              <p class="text-body" style="font-size: 0.85rem;">8 Productos</p>
+            <div class="category-footer">
+              <div>
+                <h3 class="title-3">Categoría {{ i }}</h3>
+                <p class="text-body" style="font-size: 0.85rem;">20 Productos</p>
+              </div>
+              <a href="productos.html" class="btn btn-outline" style="padding: 0.5rem 1rem;">Ver →</a>
             </div>
-            <a href="#" class="btn btn-outline" style="padding: 0.5rem 1rem;">Ver Más →</a>
           </div>
-        </div>
-        <div class="category-card">
-          <div class="placeholder-box">
-            <p>IMAGEN DE LA CATEGORÍA</p>
-            <span>Fondo de la sección / Banner categoría 3</span>
-          </div>
-          <div class="category-footer">
-            <div>
-              <h3 class="title-3">Textiles Esenciales</h3>
-              <p class="text-body" style="font-size: 0.85rem;">15 Productos</p>
-            </div>
-            <a href="#" class="btn btn-outline" style="padding: 0.5rem 1rem;">Ver Más →</a>
-          </div>
-        </div>
+        {% endfor %}
       {% endfor %}
     </div>
+
+    {% if section.settings.show_all_button %}
+      <div style="text-align: center; margin-top: 3rem;">
+        <a href="{{ section.settings.all_button_link | default: routes.collections_url }}" class="btn btn-primary">
+          {{ section.settings.all_button_text | default: "Ver Catálogo Completo →" }}
+        </a>
+      </div>
+    {% endif %}
   </div>
 </section>
 
@@ -79,7 +66,7 @@
       "type": "text",
       "id": "title_2",
       "label": "Título 2 (H2 Principal)",
-      "default": "Explora por Categorías"
+      "default": "Explora Nuestras Categorías"
     },
     {
       "type": "text",
@@ -92,34 +79,55 @@
       "id": "text_body",
       "label": "Texto Informativo",
       "default": "Navega a través de nuestras colecciones diseñadas minuciosamente."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_all_button",
+      "label": "Mostrar botón de 'Ver Catálogo Completo'",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "all_button_text",
+      "label": "Texto del Botón Completo",
+      "default": "Ver Catálogo Completo →"
+    },
+    {
+      "type": "url",
+      "id": "all_button_link",
+      "label": "Enlace del Botón Completo"
     }
   ],
   "blocks": [
     {
       "type": "category_item",
-      "name": "Tarjeta de Categoría",
+      "name": "Categoría Editable",
       "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Seleccionar Colección de Shopify"
+        },
         {
           "type": "text",
           "id": "title_3",
-          "label": "Título 3 de Categoría",
-          "default": "Nueva Categoría"
+          "label": "Título Personalizado (Opcional)"
         },
         {
           "type": "text",
           "id": "item_count_text",
           "label": "Texto secundario o cantidad",
-          "default": "10 Productos"
+          "default": "20 Productos"
         },
         {
           "type": "image_picker",
-          "id": "image",
-          "label": "Imagen de fondo de la categoría"
+          "id": "custom_image",
+          "label": "Imagen Personalizada (Opcional)"
         },
         {
           "type": "url",
           "id": "link",
-          "label": "Enlace de la categoría"
+          "label": "Enlace Personalizado (Opcional)"
         }
       ]
     }
@@ -128,9 +136,10 @@
     {
       "name": "4. Menú de Categorías",
       "blocks": [
-        { "type": "category_item", "settings": { "title_3": "Decoración y Hogar", "item_count_text": "12 Productos" } },
-        { "type": "category_item", "settings": { "title_3": "Cuidado Personal", "item_count_text": "8 Productos" } },
-        { "type": "category_item", "settings": { "title_3": "Textiles Esenciales", "item_count_text": "15 Productos" } }
+        { "type": "category_item", "settings": { "title_3": "Decoración y Hogar", "item_count_text": "20 Productos" } },
+        { "type": "category_item", "settings": { "title_3": "Textiles Orgánicos", "item_count_text": "20 Productos" } },
+        { "type": "category_item", "settings": { "title_3": "Cuidado Personal", "item_count_text": "20 Productos" } },
+        { "type": "category_item", "settings": { "title_3": "Velas y Aromaterapia", "item_count_text": "20 Productos" } }
       ]
     }
   ]

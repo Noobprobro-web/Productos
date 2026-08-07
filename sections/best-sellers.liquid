@@ -16,13 +16,13 @@
             {%- else -%}
               <div class="placeholder-box">
                 <p>IMAGEN DEL PRODUCTO</p>
-                <span>Imagen de {{ product.title }}</span>
+                <span>{{ product.title }}</span>
               </div>
             {%- endif -%}
             
             <div class="product-info">
               <span class="product-category">{{ product.type | default: "Colección" }}</span>
-              <h3 class="title-3">{{ product.title }}</h3>
+              <h3 class="title-3"><a href="{{ product.url }}">{{ product.title }}</a></h3>
               <p class="text-body" style="font-size: 0.88rem;">{{ product.description | strip_html | truncate: 75 }}</p>
               <div class="product-price">{{ product.price | money }}</div>
             </div>
@@ -34,12 +34,11 @@
           </article>
         {%- endfor -%}
       {%- else -%}
-        <!-- Fallback static products for design preview -->
-        {% for i in (1..4) %}
+        {% for i in (1..section.settings.products_to_show) %}
           <article class="product-card">
             <div class="placeholder-box">
               <p>IMAGEN DEL PRODUCTO</p>
-              <span>Imagen del producto {{ i }}</span>
+              <span>Fotografía del producto {{ i }}</span>
             </div>
             <div class="product-info">
               <span class="product-category">Categoría {{ i }}</span>
@@ -47,7 +46,7 @@
               <p class="text-body" style="font-size: 0.88rem;">Diseño exclusivo en tonos pastel verdes y marrón claro.</p>
               <div class="product-price">$45.00 USD</div>
             </div>
-            <button class="btn btn-primary">Añadir al Carrito</button>
+            <button class="btn btn-primary" onclick="window.STORE_CART.add(100 + {{ i }}); openCartModal();">Añadir al Carrito</button>
           </article>
         {% endfor %}
       {%- endif -%}
@@ -59,6 +58,10 @@
 {
   "name": "3. Productos Más Vendidos",
   "settings": [
+    {
+      "type": "header",
+      "content": "Textos de Encabezado"
+    },
     {
       "type": "text",
       "id": "title_2",
@@ -78,18 +81,22 @@
       "default": "Selección de piezas destacadas elegidas por su excepcional diseño y durabilidad."
     },
     {
+      "type": "header",
+      "content": "Origen de Datos de Shopify"
+    },
+    {
       "type": "collection",
       "id": "collection",
-      "label": "Colección a Mostrar"
+      "label": "Seleccionar Colección de Shopify"
     },
     {
       "type": "range",
       "id": "products_to_show",
       "min": 2,
-      "max": 8,
+      "max": 12,
       "step": 1,
       "default": 4,
-      "label": "Cantidad de productos a mostrar"
+      "label": "Cantidad de Productos a Mostrar"
     }
   ],
   "presets": [
