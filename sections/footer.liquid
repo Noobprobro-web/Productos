@@ -13,20 +13,19 @@
       <div class="footer-col">
         <h3 class="title-3">Navegación</h3>
         <ul class="footer-links">
-          <li><a href="#hero">Inicio</a></li>
-          <li><a href="#mas-vendidos">Más Vendidos</a></li>
-          <li><a href="#categorias">Categorías</a></li>
-          <li><a href="#reseñas">Reseñas</a></li>
+          <li><a href="{{ routes.root_url }}">Inicio</a></li>
+          <li><a href="{{ routes.all_products_collection_url }}">Catálogo Completo</a></li>
+          <li><a href="{{ routes.collections_url }}">20 Categorías</a></li>
+          <li><a href="/pages/quienes-somos">Quiénes Somos</a></li>
         </ul>
       </div>
 
       <div class="footer-col">
         <h3 class="title-3">Ayuda</h3>
         <ul class="footer-links">
-          <li><a href="#">Preguntas Frecuentes</a></li>
-          <li><a href="#">Envíos y Devoluciones</a></li>
-          <li><a href="#">Contacto</a></li>
-          <li><a href="#">Términos y Condiciones</a></li>
+          <li><a href="/pages/contacto">Contacto</a></li>
+          <li><a href="{{ routes.cart_url }}">Tu Carrito</a></li>
+          <li><a href="{{ routes.search_url }}">Buscar Productos</a></li>
         </ul>
       </div>
 
