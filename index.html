@@ -6,6 +6,11 @@
   <title>Tienda Minimalista - Referencia Atelier</title>
   <meta name="description" content="Descubre productos exclusivos en nuestra tienda minimalista con diseño inspirado en Atelier.">
   <link rel="stylesheet" href="./assets/base.css">
+  
+  <!-- GSAP & ScrollTrigger Libraries CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+  <script src="./assets/main.js" defer></script>
 </head>
 <body>
 
@@ -38,18 +43,18 @@
     <section id="hero" class="section-hero">
       <div class="container hero-grid">
         <div class="hero-content">
-          <span class="hero-badge">Colección Esencial 2026</span>
-          <h1 class="title-1">Diseño Minimalista para tu Estilo de Vida</h1>
-          <h2 class="title-2">Crea espacios serenos con nuestra nueva línea de productos sostenibles.</h2>
-          <p class="text-body">
+          <span class="hero-badge gsap-hero-badge">Colección Esencial 2026</span>
+          <h1 class="title-1 gsap-hero-title1">Diseño Minimalista para tu Estilo de Vida</h1>
+          <h2 class="title-2 gsap-hero-title2">Crea espacios serenos con nuestra nueva línea de productos sostenibles.</h2>
+          <p class="text-body gsap-hero-text">
             Diseñamos objetos pensados para perdurar. Cada pieza combina funcionalidad pura y estética natural para transformar tu día a día en una experiencia de calma.
           </p>
-          <div style="margin-top: 1rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+          <div class="gsap-hero-cta" style="margin-top: 1rem; display: flex; gap: 1rem; flex-wrap: wrap;">
             <a href="#mas-vendidos" class="btn btn-primary">Explorar Colección</a>
             <a href="#categorias" class="btn btn-secondary">Ver Categorías</a>
           </div>
         </div>
-        <div class="hero-media">
+        <div class="hero-media gsap-hero-media">
           <div class="placeholder-box">
             <p>IMAGEN DE BIENVENIDA</p>
             <span>Fondo de la sección hero / Fotografía lifestyle principal</span>
