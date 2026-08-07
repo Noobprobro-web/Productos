@@ -24,24 +24,78 @@
   <!-- Header -->
   <header class="site-header">
     <div class="container header-inner">
-      <a href="#" class="logo">ATELIER<span>.</span></a>
+      <a href="index.html" class="logo">ATELIER<span>.</span></a>
+      
       <nav class="main-nav">
         <ul>
           <li><a href="index.html">Inicio</a></li>
-          <li><a href="productos.html">Productos</a></li>
+          
+          <!-- Megamenu Desplegable Tendencias -->
+          <li class="nav-item-dropdown">
+            <a href="productos.html" style="display: flex; align-items: center; gap: 0.3rem;">
+              Productos ▾
+            </a>
+            <div class="dropdown-menu">
+              <div>
+                <div class="dropdown-col-title">Tendencias de la Temporada 🔥</div>
+                <ul class="trends-list">
+                  <li>
+                    <a href="productos.html?cat=hogar-decoracion" class="trend-badge-item">
+                      <span>Cerámica Mate Verde Pastel</span>
+                      <span class="trend-badge">Tendencia #1</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="productos.html?cat=textiles-organicos" class="trend-badge-item">
+                      <span>Lino Orgánico Marrón Claro</span>
+                      <span class="trend-badge">Top Ventas</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="productos.html?cat=velas-aromas" class="trend-badge-item">
+                      <span>Velas de Soja & Aromaterapia</span>
+                      <span class="trend-badge">Nuevo</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="productos.html?cat=accesorios-bambu" class="trend-badge-item">
+                      <span>Organizadores de Bambú Natural</span>
+                      <span class="trend-badge">Sostenible</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              
+              <div>
+                <div class="dropdown-col-title">Categorías Populares</div>
+                <ul class="footer-links" style="gap: 0.5rem;">
+                  <li><a href="productos.html?cat=hogar-decoracion">Decoración y Hogar</a></li>
+                  <li><a href="productos.html?cat=textiles-organicos">Textiles Orgánicos</a></li>
+                  <li><a href="productos.html?cat=cuidado-personal">Cuidado Personal</a></li>
+                  <li><a href="productos.html?cat=iluminacion-warm">Iluminación Cálida</a></li>
+                  <li><a href="productos.html" style="font-weight: 700; color: var(--color-green-dark); margin-top: 0.5rem; display: inline-block;">Ver 20 Categorías →</a></li>
+                </ul>
+              </div>
+            </div>
+          </li>
+
           <li><a href="quienes-somos.html">Quiénes Somos</a></li>
           <li><a href="contacto.html">Contacto</a></li>
         </ul>
       </nav>
+
       <div class="header-actions">
-        <button class="icon-btn" aria-label="Buscar">
-          <svg class="icon-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <!-- Buscador Integrado -->
+        <div class="header-search-bar">
+          <svg class="icon-svg" style="width: 16px; height: 16px; opacity: 0.6;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
             <circle cx="11" cy="11" r="8"></circle>
             <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
           </svg>
-        </button>
-        <button class="icon-btn" aria-label="Carrito">
-          <svg class="icon-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <input type="text" class="header-search-input" placeholder="Buscar 400 productos..." onfocus="openSearchModal()">
+        </div>
+
+        <button class="icon-btn" aria-label="Carrito" onclick="openCartModal()">
+          <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
             <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
             <line x1="3" y1="6" x2="21" y2="6"></line>
             <path d="M16 10a4 4 0 0 1-8 0"></path>

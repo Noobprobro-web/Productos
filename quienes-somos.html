@@ -4,9 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Quiénes Somos - Atelier Minimal Store</title>
-  <meta name="description" content="Conoce la filosofía, visión y compromiso detrás de Atelier Minimal Store.">
+  <meta name="description" content="Conoce la filosofía, historia, sostenibilidad y equipo detrás de Atelier Minimal Store.">
   <link rel="stylesheet" href="./assets/base.css">
   
+  <script src="./assets/data-store.js"></script>
+  <script src="./assets/store-features.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
   <script src="./assets/main.js" defer></script>
@@ -20,33 +22,79 @@
   <header class="site-header">
     <div class="container header-inner">
       <a href="index.html" class="logo">ATELIER<span>.</span></a>
+      
       <nav class="main-nav">
         <ul>
           <li><a href="index.html">Inicio</a></li>
-          <li><a href="productos.html">Productos</a></li>
+          
+          <li class="nav-item-dropdown">
+            <a href="productos.html" style="display: flex; align-items: center; gap: 0.3rem;">
+              Productos ▾
+            </a>
+            <div class="dropdown-menu">
+              <div>
+                <div class="dropdown-col-title">Tendencias de la Temporada 🔥</div>
+                <ul class="trends-list">
+                  <li>
+                    <a href="productos.html?cat=hogar-decoracion" class="trend-badge-item">
+                      <span>Cerámica Mate Verde Pastel</span>
+                      <span class="trend-badge">Tendencia #1</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="productos.html?cat=textiles-organicos" class="trend-badge-item">
+                      <span>Lino Orgánico Marrón Claro</span>
+                      <span class="trend-badge">Top Ventas</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              
+              <div>
+                <div class="dropdown-col-title">Categorías Populares</div>
+                <ul class="footer-links" style="gap: 0.5rem;">
+                  <li><a href="productos.html?cat=hogar-decoracion">Decoración y Hogar</a></li>
+                  <li><a href="productos.html?cat=textiles-organicos">Textiles Orgánicos</a></li>
+                </ul>
+              </div>
+            </div>
+          </li>
+
           <li><a href="quienes-somos.html" style="color: var(--color-green-dark); font-weight: 700;">Quiénes Somos</a></li>
           <li><a href="contacto.html">Contacto</a></li>
         </ul>
       </nav>
+
       <div class="header-actions">
-        <button class="icon-btn" aria-label="Buscar">
-          <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-        </button>
-        <button class="icon-btn" aria-label="Carrito">
-          <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+        <div class="header-search-bar">
+          <svg class="icon-svg" style="width: 16px; height: 16px; opacity: 0.6;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input type="text" class="header-search-input" placeholder="Buscar 400 productos..." onfocus="openSearchModal()">
+        </div>
+
+        <button class="icon-btn" aria-label="Carrito" onclick="openCartModal()">
+          <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <path d="M16 10a4 4 0 0 1-8 0"></path>
+          </svg>
         </button>
       </div>
     </div>
   </header>
 
   <main>
+    <!-- Banner de Cabecera -->
     <section class="page-header-banner">
       <div class="container">
-        <h1 class="title-1">Nuestra Historia y Filosofía</h1>
-        <h2 class="title-2">Diseño intencional para una vida más serena</h2>
+        <h1 class="title-1">Nuestra Historia & Filosofía</h1>
+        <h2 class="title-2">Diseño intencional para una vida más serena y consciente</h2>
       </div>
     </section>
 
+    <!-- SECCIÓN 1: INTRODUCCIÓN Y MANIFIESTO -->
     <section class="container about-hero">
       <div class="hero-content">
         <span class="hero-badge">Fundada en 2024</span>
@@ -66,7 +114,7 @@
       </div>
     </section>
 
-    <!-- Valores -->
+    <!-- SECCIÓN 2: PILARES Y VALORES -->
     <section class="section-categories">
       <div class="container">
         <div class="section-header">
@@ -97,6 +145,71 @@
             </div>
             <h3 class="title-3">Diseño Atemporal</h3>
             <p class="text-body" style="font-size: 0.88rem; margin-top: 0.5rem;">Piezas pensadas para trascender modas pasajeras y perdurar en el tiempo.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN NUEVA 3: LÍNEA DE TIEMPO / NUESTRA TRAYECTORIA (EXTENDED) -->
+    <section class="section-reviews" style="background-color: var(--color-bg);">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="title-2">Nuestra Trayectoria</h2>
+          <h3 class="title-3">El camino hacia la simplicidad intencional</h3>
+          <p class="text-body">Cómo pasamos de un pequeño estudio artesanal a una tienda con 400 piezas de diseño.</p>
+        </div>
+
+        <div class="timeline-grid">
+          <div class="timeline-card">
+            <div class="timeline-year">2024</div>
+            <h3 class="title-3">El Nacimiento</h3>
+            <p class="text-body" style="font-size:0.88rem; margin-top:0.4rem;">Comenzamos con una colección cápsula de 10 jarrones de cerámica modelados a mano.</p>
+          </div>
+
+          <div class="timeline-card">
+            <div class="timeline-year">2025</div>
+            <h3 class="title-3">Lino & Bambú</h3>
+            <p class="text-body" style="font-size:0.88rem; margin-top:0.4rem;">Expandimos hacia textiles 100% orgánicos y accesorios de bambú sustentable.</p>
+          </div>
+
+          <div class="timeline-card">
+            <div class="timeline-year">2026</div>
+            <h3 class="title-3">Universo Atelier</h3>
+            <p class="text-body" style="font-size:0.88rem; margin-top:0.4rem;">Llegamos a 20 categorías integrales con 400 productos en tonos pastel verde y tierra.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN NUEVA 4: EL EQUIPO CREADOR (EXTENDED) -->
+    <section class="section-best-sellers">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="title-2">El Equipo Detrás del Diseño</h2>
+          <h3 class="title-3">Mentes creativas apasionadas por el detalle</h3>
+          <p class="text-body">Diseñadores, ceramistas y artesanos unidos por la misma visión.</p>
+        </div>
+
+        <div class="team-grid">
+          <div class="team-card">
+            <div class="team-avatar">EA</div>
+            <h3 class="title-3">Elena Álvarez</h3>
+            <p class="text-body" style="font-size:0.82rem; color: var(--color-green-dark); font-weight:600;">Directora de Diseño</p>
+            <p class="text-body" style="font-size:0.85rem; margin-top:0.4rem;">Especialista en paletas de color pastel e interiorismo zen.</p>
+          </div>
+
+          <div class="team-card">
+            <div class="team-avatar">MR</div>
+            <h3 class="title-3">Mateo Ruiz</h3>
+            <p class="text-body" style="font-size:0.82rem; color: var(--color-green-dark); font-weight:600;">Maestro Ceramista</p>
+            <p class="text-body" style="font-size:0.85rem; margin-top:0.4rem;">Encargado del acabado mate y moldeado artesanal.</p>
+          </div>
+
+          <div class="team-card">
+            <div class="team-avatar">SC</div>
+            <h3 class="title-3">Sofia Castro</h3>
+            <p class="text-body" style="font-size:0.82rem; color: var(--color-green-dark); font-weight:600;">Directora de Sostenibilidad</p>
+            <p class="text-body" style="font-size:0.85rem; margin-top:0.4rem;">Garantiza la certificación ecológica de materiales e insumos.</p>
           </div>
         </div>
       </div>
