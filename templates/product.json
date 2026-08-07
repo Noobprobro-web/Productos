@@ -1,15 +1,19 @@
 {
   "sections": {
-    "product_detail": {
+    "main": {
+      "type": "main-product"
+    },
+    "recommendations": {
       "type": "best-sellers",
       "settings": {
-        "title_2": "Detalles del Producto",
-        "title_3": "Piezas Relacionadas",
-        "text_body": "Explora otros productos de nuestra colección."
+        "title_2": "Completa Tu Espacio",
+        "title_3": "Piezas complementarias recomendadas",
+        "text_body": "Selección de objetos diseñados para armonizar con este producto."
       }
     }
   },
   "order": [
-    "product_detail"
+    "main",
+    "recommendations"
   ]
 }

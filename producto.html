@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Producto Generico Minimal - Atelier</title>
+  
+  <!-- Fonts Google -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Raleway:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+  
+  <!-- Styles Base -->
+  <link rel="stylesheet" href="assets/base.css">
+  
+  <!-- GSAP Core & ScrollTrigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  
+  <!-- Stores & Features -->
+  <script src="assets/data-store.js"></script>
+  <script src="assets/store-features.js"></script>
+</head>
+<body>
+
+  <!-- HEADER NATIVO CON MEGAMENU Y BUSCADOR -->
+  <header class="site-header">
+    <div class="container header-container">
+      <a href="index.html" class="logo">ATELIER<span>.</span></a>
+
+      <nav class="main-nav">
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          
+          <li class="nav-item-dropdown">
+            <a href="productos.html" class="nav-link-dropdown active">
+              Productos
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+            </a>
+
+            <div class="megamenu-dropdown">
+              <div class="megamenu-column">
+                <h4>🔥 Tendencias 2026</h4>
+                <ul>
+                  <li><a href="productos.html?cat=hogar-decoracion">Decoración Minimalista</a></li>
+                  <li><a href="productos.html?cat=textiles-organicos">Textiles de Lino Puro</a></li>
+                  <li><a href="productos.html?cat=velas-aromas">Velas de Soja Orgánica</a></li>
+                  <li><a href="productos.html?cat=accesorios-bambu">Accesorios Eco-Bambú</a></li>
+                </ul>
+              </div>
+
+              <div class="megamenu-column">
+                <h4>🌿 Por Categoría</h4>
+                <ul>
+                  <li><a href="productos.html?cat=hogar-decoracion">Decoración y Hogar</a></li>
+                  <li><a href="productos.html?cat=textiles-organicos">Textiles Orgánicos</a></li>
+                  <li><a href="productos.html?cat=cuidado-personal">Cuidado Personal</a></li>
+                  <li><a href="productos.html?cat=iluminacion-warm">Iluminación Cálida</a></li>
+                </ul>
+              </div>
+
+              <div class="megamenu-banner">
+                <p>NUEVA COLECCIÓN</p>
+                <h5>Verde Soft & Marrón Tierra</h5>
+                <a href="productos.html" class="btn btn-primary" style="padding: 0.4rem 0.8rem; font-size: 0.8rem;">Ver Catálogo</a>
+              </div>
+            </div>
+          </li>
+
+          <li><a href="quienes-somos.html">Quiénes Somos</a></li>
+          <li><a href="contacto.html">Contacto</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <button class="icon-btn search-trigger-btn" id="openSearchBtn" aria-label="Buscar">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        </button>
+
+        <button class="icon-btn cart-trigger-btn" id="openCartBtn" aria-label="Carrito de compras">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          <span class="cart-badge" id="headerCartCount">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- SECCIÓN PRINCIPAL DEL PRODUCTO (HERO COMPRA + GALERÍA REPRODUCTORA) -->
+  <main class="product-page-main" style="padding: 3rem 0; background: var(--color-bg-base);">
+    <div class="container">
+      
+      <!-- BREADCRUMB -->
+      <nav class="breadcrumb" style="margin-bottom: 2rem; font-size: 0.88rem; color: var(--color-text-muted);">
+        <a href="index.html" style="color: var(--color-text-muted);">Inicio</a> / 
+        <a href="productos.html" style="color: var(--color-text-muted);">Productos</a> / 
+        <span id="pPageBreadcrumbCategory" style="color: var(--color-dark); font-weight: 500;">Decoración y Hogar</span> / 
+        <span id="pPageBreadcrumbTitle" style="color: var(--color-green-dark); font-weight: 600;">Jarrón Artesanal Atelier Nº1</span>
+      </nav>
+
+      <div class="product-detail-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 3.5rem; align-items: start;">
+        
+        <!-- GALERÍA DE IMÁGENES -->
+        <div class="product-gallery-wrapper">
+          <div class="main-image-frame" style="background: var(--color-surface); border-radius: var(--radius-md); border: 1px solid rgba(0,0,0,0.06); padding: 2rem; text-align: center; position: relative;">
+            <span class="badge-stock-pill" style="position: absolute; top: 1rem; left: 1rem; background: var(--color-green-soft); color: var(--color-green-dark); padding: 0.3rem 0.8rem; border-radius: var(--radius-full); font-size: 0.78rem; font-weight: 600;">ENVÍO GRATIS 24H</span>
+            
+            <div id="pPageMainImagePlaceholder" class="placeholder-box" style="min-height: 400px; display: flex; flex-direction: column; justify-content: center;">
+              <p style="font-family: var(--font-heading); font-size: 1.3rem; font-weight: 700; color: var(--color-green-dark);">FOTOGRAFÍA PRINCIPAL DEL PRODUCTO</p>
+              <span id="pPageMainImageSub" style="color: var(--color-text-muted); font-size: 0.9rem; margin-top: 0.5rem;">Vista en ángulo de 45º / Tonos pastel verdes y marrón tierra</span>
+            </div>
+          </div>
+
+          <!-- THUMBNAILS -->
+          <div class="thumbs-grid" style="display: flex; gap: 1rem; margin-top: 1rem;">
+            <div class="thumb-box active" style="flex: 1; background: var(--color-surface); border: 2px solid var(--color-green-dark); border-radius: var(--radius-sm); padding: 1rem; text-align: center; cursor: pointer;">
+              <span style="font-size: 0.75rem; font-weight: 600;">ÁNGULO 1</span>
+            </div>
+            <div class="thumb-box" style="flex: 1; background: var(--color-surface); border: 1px solid rgba(0,0,0,0.08); border-radius: var(--radius-sm); padding: 1rem; text-align: center; cursor: pointer;">
+              <span style="font-size: 0.75rem; font-weight: 600;">DETALLE</span>
+            </div>
+            <div class="thumb-box" style="flex: 1; background: var(--color-surface); border: 1px solid rgba(0,0,0,0.08); border-radius: var(--radius-sm); padding: 1rem; text-align: center; cursor: pointer;">
+              <span style="font-size: 0.75rem; font-weight: 600;">LIFESTYLE</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- INFORMACIÓN Y PANEL DE COMPRA -->
+        <div class="product-buy-panel">
+          <span id="pPageCategory" class="product-category" style="font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-green-dark); font-weight: 700;">DECORACIÓN Y HOGAR</span>
+          
+          <h1 id="pPageTitle" class="title-1" style="font-size: 2.2rem; margin: 0.5rem 0 1rem 0; font-weight: 700;">Jarrón Artesanal Atelier Nº1</h1>
+
+          <!-- VALORACIÓN & REVIEWS -->
+          <div class="product-rating-row" style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.25rem;">
+            <div class="stars" style="color: #F5A623; font-size: 1.1rem;">★★★★★</div>
+            <span style="font-size: 0.88rem; font-weight: 600; color: var(--color-dark);">4.9 / 5.0</span>
+            <span style="font-size: 0.85rem; color: var(--color-text-muted);">(128 valoraciones verificadas)</span>
+          </div>
+
+          <!-- PRECIO -->
+          <div class="product-price-box" style="display: flex; align-items: baseline; gap: 1rem; margin-bottom: 1.5rem;">
+            <span id="pPagePrice" class="product-price" style="font-size: 2rem; font-weight: 800; color: var(--color-dark);">$48.50 USD</span>
+            <span style="font-size: 1rem; text-decoration: line-through; color: var(--color-text-muted);">$65.00 USD</span>
+            <span style="background: #E8F5E9; color: #2E7D32; font-size: 0.8rem; font-weight: 700; padding: 0.2rem 0.6rem; border-radius: var(--radius-sm);">AHORRAS 25%</span>
+          </div>
+
+          <!-- DESCRIPCIÓN CORTA -->
+          <p id="pPageDesc" class="text-body" style="font-size: 0.95rem; margin-bottom: 2rem; line-height: 1.6;">
+            Pieza artesanal moldeada con cerámica orgánica refinada. Su acabado en textura mate verde pastel y base en marrón claro brinda serenidad, equilibrio y minimalismo a cualquier rincón de tu hogar.
+          </p>
+
+          <!-- SELECTOR DE VARIANTES Y CANTIDAD -->
+          <div class="variants-wrapper" style="margin-bottom: 2rem;">
+            <label style="display: block; font-size: 0.88rem; font-weight: 600; margin-bottom: 0.5rem;">Tono / Acabado:</label>
+            <div class="color-options" style="display: flex; gap: 0.75rem;">
+              <button class="color-chip active" style="padding: 0.6rem 1.2rem; background: var(--color-green-soft); border: 2px solid var(--color-green-dark); border-radius: var(--radius-sm); font-family: var(--font-body); font-size: 0.85rem; font-weight: 600; cursor: pointer;">Verde Soft Natural</button>
+              <button class="color-chip" style="padding: 0.6rem 1.2rem; background: var(--color-brown-light); border: 1px solid rgba(0,0,0,0.1); border-radius: var(--radius-sm); font-family: var(--font-body); font-size: 0.85rem; font-weight: 500; cursor: pointer;">Marrón Tierra Pastel</button>
+            </div>
+          </div>
+
+          <!-- BOTONES DE COMPRA DIRECTA -->
+          <div class="buy-actions-wrapper" style="display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2.5rem;">
+            <div style="display: flex; gap: 1rem;">
+              <div class="qty-picker" style="display: flex; align-items: center; border: 1px solid rgba(0,0,0,0.15); border-radius: var(--radius-sm); background: var(--color-surface);">
+                <button style="padding: 0.75rem 1rem; border: none; background: transparent; font-size: 1.1rem; cursor: pointer;">-</button>
+                <input type="number" value="1" min="1" style="width: 45px; text-align: center; border: none; background: transparent; font-weight: 600; font-family: var(--font-body);">
+                <button style="padding: 0.75rem 1rem; border: none; background: transparent; font-size: 1.1rem; cursor: pointer;">+</button>
+              </div>
+
+              <button id="pPageAddCartBtn" class="btn btn-primary" style="flex: 1; padding: 1rem 1.5rem; font-size: 1rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">
+                Añadir al Carrito
+              </button>
+            </div>
+
+            <button class="btn btn-secondary" style="width: 100%; padding: 0.9rem; font-size: 0.95rem; font-weight: 700; background: var(--color-brown-light); border-color: var(--color-brown-dark); color: var(--color-brown-dark);">
+              ⚡ Comprar Ahora con 1-Clic
+            </button>
+          </div>
+
+          <!-- BENEFICIOS & GARANTÍAS -->
+          <div class="trust-features-box" style="background: var(--color-surface); padding: 1.5rem; border-radius: var(--radius-md); border: 1px solid rgba(0,0,0,0.06); display: flex; flex-direction: column; gap: 1rem;">
+            <div style="display: flex; align-items: center; gap: 0.8rem;">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--color-green-dark)" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+              <span style="font-size: 0.88rem; font-weight: 500;">Envío Rápido 24-48h con seguimiento garantizado.</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 0.8rem;">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--color-green-dark)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              <span style="font-size: 0.88rem; font-weight: 500;">Garantía de Devolución de 30 Días sin preguntas.</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- SECCIÓN SECCIONAL DE ESPECIFICACIONES Y CARACTERÍSTICAS -->
+      <section class="product-features-spec-section" style="margin-top: 5rem; padding-top: 4rem; border-top: 1px solid rgba(0,0,0,0.08);">
+        <div class="section-header" style="text-align: center; max-width: 700px; margin: 0 auto 3.5rem auto;">
+          <h2 class="title-2">Diseño Meticuloso en Cada Detalle</h2>
+          <h3 class="title-3">Creado para integrarse con la naturaleza de tu hogar</h3>
+          <p class="text-body">Cada pieza de la línea Atelier pasa por un proceso de moldeado artesanal y curaduría ecológica estricta.</p>
+        </div>
+
+        <div class="spec-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;">
+          <div class="spec-card" style="background: var(--color-surface); padding: 2rem; border-radius: var(--radius-md); border: 1px solid rgba(0,0,0,0.05);">
+            <div style="width: 48px; height: 48px; background: var(--color-green-soft); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 1.2rem; color: var(--color-green-dark);">
+              🌱
+            </div>
+            <h3 class="title-3" style="font-size: 1.2rem; margin-bottom: 0.5rem;">Materiales 100% Sostenibles</h3>
+            <p class="text-body" style="font-size: 0.88rem;">Fabricado exclusivamente con componentes orgánicos biodegradables y tintes naturales ecológicos.</p>
+          </div>
+
+          <div class="spec-card" style="background: var(--color-surface); padding: 2rem; border-radius: var(--radius-md); border: 1px solid rgba(0,0,0,0.05);">
+            <div style="width: 48px; height: 48px; background: var(--color-brown-light); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 1.2rem; color: var(--color-brown-dark);">
+              ✨
+            </div>
+            <h3 class="title-3" style="font-size: 1.2rem; margin-bottom: 0.5rem;">Acabado Mate Soft</h3>
+            <p class="text-body" style="font-size: 0.88rem;">Textura ultrasuave al tacto en tonos pastel verde y marrón claro que reflejan la luz de forma cálida.</p>
+          </div>
+
+          <div class="spec-card" style="background: var(--color-surface); padding: 2rem; border-radius: var(--radius-md); border: 1px solid rgba(0,0,0,0.05);">
+            <div style="width: 48px; height: 48px; background: var(--color-green-soft); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 1.2rem; color: var(--color-green-dark);">
+              🛡️
+            </div>
+            <h3 class="title-3" style="font-size: 1.2rem; margin-bottom: 0.5rem;">Máxima Durabilidad</h3>
+            <p class="text-body" style="font-size: 0.88rem;">Estructura reforzada pensada para resistir el paso de los años sin perder su color natural.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECCIÓN DE PRODUCTOS RELACIONADOS -->
+      <section class="related-products-section" style="margin-top: 5rem;">
+        <div class="section-header">
+          <h2 class="title-2">Completa Tu Espacio</h2>
+          <h3 class="title-3">Piezas complementarias recomendadas</h3>
+        </div>
+
+        <div class="products-grid" id="relatedProductsGrid">
+          <!-- Renderizado dinámico desde JS -->
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- FOOTER NATIVO COMPLETO -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-col">
+        <a href="index.html" class="logo" style="color:#ffffff;">ATELIER<span>.</span></a>
+        <p class="text-body" style="color: rgba(255,255,255,0.7); margin-top: 1rem;">
+          Diseño minimalista y productos sostenibles para crear espacios serenos y funcionales.
+        </p>
+      </div>
+
+      <div class="footer-col">
+        <h3 class="title-3" style="color:#ffffff; font-size: 1.1rem; margin-bottom: 1.2rem;">Enlaces Rápidos</h3>
+        <ul style="list-style: none;">
+          <li style="margin-bottom: 0.5rem;"><a href="index.html" style="color: rgba(255,255,255,0.8);">Inicio</a></li>
+          <li style="margin-bottom: 0.5rem;"><a href="productos.html" style="color: rgba(255,255,255,0.8);">Productos</a></li>
+          <li style="margin-bottom: 0.5rem;"><a href="quienes-somos.html" style="color: rgba(255,255,255,0.8);">Quiénes Somos</a></li>
+          <li style="margin-bottom: 0.5rem;"><a href="contacto.html" style="color: rgba(255,255,255,0.8);">Contacto</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h3 class="title-3" style="color:#ffffff; font-size: 1.1rem; margin-bottom: 1.2rem;">Atención al Cliente</h3>
+        <p class="text-body" style="color: rgba(255,255,255,0.7);">Lunes a Viernes: 9:00 - 18:00 hrs</p>
+        <p class="text-body" style="color: rgba(255,255,255,0.7); margin-top: 0.5rem;">hola@atelierminimal.com</p>
+      </div>
+    </div>
+
+    <div class="container footer-bottom" style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); text-align: center; color: rgba(255,255,255,0.5); font-size: 0.85rem;">
+      <p>&copy; 2026 Atelier Minimal. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- MODALES DE BÚSQUEDA Y CARRITO -->
+  <div class="search-modal-overlay" id="searchModal">
+    <div class="search-modal-card">
+      <div class="search-modal-header">
+        <h3>Buscador Atelier</h3>
+        <button class="modal-close-btn" id="closeSearchBtn">&times;</button>
+      </div>
+      <input type="text" id="liveSearchInput" class="form-control" placeholder="Buscar entre 400 productos..." autofocus>
+      <div class="search-results-list" id="searchResultsContainer"></div>
+    </div>
+  </div>
+
+  <div class="cart-drawer-overlay" id="cartDrawer">
+    <div class="cart-drawer-card">
+      <div class="cart-drawer-header">
+        <h3>Tu Carrito</h3>
+        <button class="modal-close-btn" id="closeCartBtn">&times;</button>
+      </div>
+      <div class="cart-items-body" id="cartItemsContainer"></div>
+      <div class="cart-drawer-footer">
+        <div class="cart-total-row">
+          <span>Total Estestimado:</span>
+          <strong id="cartTotalAmount">$0.00 USD</strong>
+        </div>
+        <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Proceder al Pago</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCRIPT DE CARGA DINÁMICA DE PRODUCTO POR URL PARAMS -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const params = new URLSearchParams(window.location.search);
+      const prodId = parseInt(params.get("id")) || 101;
+      
+      const product = window.PRODUCT_DATA.find(p => p.id === prodId) || window.PRODUCT_DATA[0];
+
+      // Insertar datos en los elementos HTML
+      document.getElementById("pPageBreadcrumbCategory").textContent = product.category;
+      document.getElementById("pPageBreadcrumbTitle").textContent = product.name;
+      document.getElementById("pPageCategory").textContent = product.category;
+      document.getElementById("pPageTitle").textContent = product.name;
+      document.getElementById("pPagePrice").textContent = `$${product.price.toFixed(2)} USD`;
+      document.getElementById("pPageDesc").textContent = product.description;
+      
+      document.getElementById("pPageMainImageSub").textContent = `Fotografía oficial de ${product.name} / Tonos verde pastel y marrón claro.`;
+
+      // Evento añadir al carrito
+      document.getElementById("pPageAddCartBtn").addEventListener("click", () => {
+        window.STORE_CART.add(product.id);
+        if (window.openCartModal) window.openCartModal();
+      });
+
+      // Cargar productos relacionados (4 productos de la misma categoría o aleatorios)
+      const related = window.PRODUCT_DATA.filter(p => p.categoryId === product.categoryId && p.id !== product.id).slice(0, 4);
+      const relatedGrid = document.getElementById("relatedProductsGrid");
+
+      if (relatedGrid && related.length > 0) {
+        relatedGrid.innerHTML = related.map(item => `
+          <article class="product-card">
+            <div class="placeholder-box">
+              <p>IMAGEN DE PRODUCTO</p>
+              <span>${item.name}</span>
+            </div>
+            <div class="product-info">
+              <span class="product-category">${item.category}</span>
+              <h3 class="title-3"><a href="producto.html?id=${item.id}">${item.name}</a></h3>
+              <p class="text-body" style="font-size: 0.88rem;">${item.description.substring(0, 75)}...</p>
+              <div class="product-price">$${item.price.toFixed(2)} USD</div>
+            </div>
+            <button class="btn btn-primary" onclick="window.STORE_CART.add(${item.id}); if(window.openCartModal) window.openCartModal();">Añadir al Carrito</button>
+          </article>
+        `).join("");
+      }
+    });
+  </script>
+</body>
+</html>
