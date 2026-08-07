@@ -1,51 +1,44 @@
 <section id="categorias" class="section-categories">
   <div class="container">
     <div class="section-header">
-      <h2 class="title-2">{{ section.settings.title_2 | default: "Explora por Categorías" }}</h2>
-      <h3 class="title-3">{{ section.settings.title_3 | default: "Encuentra exactamente lo que necesitas para tu espacio" }}</h3>
-      <p class="text-body">{{ section.settings.text_body | default: "Navega a través de nuestras colecciones diseñadas minuciosamente." }}</p>
+      <h2 class="title-2">{{ section.settings.title_2 | default: "Explora Nuestras 20 Categorías" }}</h2>
+      <h3 class="title-3">{{ section.settings.title_3 | default: "20 productos meticulosamente seleccionados por cada línea" }}</h3>
+      <p class="text-body">{{ section.settings.text_body | default: "Navega a través de nuestro universo completo de 400 productos sostenibles." }}</p>
     </div>
 
     <div class="categories-grid-extended">
-      {% for block in section.blocks %}
-        <div class="category-card" {{ block.shopify_attributes }}>
-          {% if block.settings.collection.image != blank %}
-            <img src="{{ block.settings.collection.image | image_url: width: 600 }}" alt="{{ block.settings.collection.title }}" loading="lazy" style="border-radius: var(--radius-md); height: 180px; object-fit: cover; width:100%;">
-          {% elsif block.settings.custom_image != blank %}
-            <img src="{{ block.settings.custom_image | image_url: width: 600 }}" alt="{{ block.settings.title_3 }}" loading="lazy" style="border-radius: var(--radius-md); height: 180px; object-fit: cover; width:100%;">
-          {% else %}
-            <div class="placeholder-box" style="min-height: 180px;">
-              <p>IMAGEN CATEGORÍA</p>
-              <span>{{ block.settings.title_3 | default: block.settings.collection.title }}</span>
-            </div>
-          {% endif %}
-          
-          <div class="category-footer">
-            <div>
-              <h3 class="title-3">{{ block.settings.title_3 | default: block.settings.collection.title | default: "Nombre Categoría" }}</h3>
-              <p class="text-body" style="font-size: 0.85rem;">{{ block.settings.item_count_text | default: "Colección Destacada" }}</p>
-            </div>
-            <a href="{{ block.settings.collection.url | default: block.settings.link | default: '#' }}" class="btn btn-outline" style="padding: 0.5rem 1rem;">Ver →</a>
-          </div>
-        </div>
-      {% else %}
-        <!-- Fallback static blocks for editor preview -->
-        {% for i in (1..6) %}
+      {%- if collections.size > 0 and section.settings.use_shopify_collections -%}
+        {%- for collection in collections limit: 20 -%}
           <div class="category-card">
-            <div class="placeholder-box" style="min-height: 180px;">
-              <p>IMAGEN CATEGORÍA</p>
-              <span>Banner categoría {{ i }}</span>
+            <div class="category-card-content" style="padding: 1.5rem; text-align: center;">
+              <h3 class="title-3" style="font-size: 1.25rem; font-weight: 600; color: var(--color-dark); margin-bottom: 0.4rem;">{{ collection.title }}</h3>
+              <p class="text-body" style="font-size: 0.85rem; color: var(--color-text-muted);">{{ collection.products_count | default: 20 }} Productos disponible</p>
             </div>
-            <div class="category-footer">
-              <div>
-                <h3 class="title-3">Categoría {{ i }}</h3>
-                <p class="text-body" style="font-size: 0.85rem;">20 Productos</p>
-              </div>
-              <a href="productos.html" class="btn btn-outline" style="padding: 0.5rem 1rem;">Ver →</a>
-            </div>
+            <a href="{{ collection.url }}" class="category-card-link" style="position: absolute; inset:0;" aria-label="{{ collection.title }}"></a>
           </div>
+        {%- endfor -%}
+      {%- else -%}
+        {% for block in section.blocks %}
+          <div class="category-card" {{ block.shopify_attributes }}>
+            <div class="category-card-content" style="padding: 1.5rem; text-align: center;">
+              <h3 class="title-3" style="font-size: 1.25rem; font-weight: 600; color: var(--color-dark); margin-bottom: 0.4rem;">{{ block.settings.title_3 | default: block.settings.collection.title | default: "Nombre Categoría" }}</h3>
+              <p class="text-body" style="font-size: 0.85rem; color: var(--color-text-muted);">{{ block.settings.item_count_text | default: "20 Productos disponible" }}</p>
+            </div>
+            <a href="{{ block.settings.collection.url | default: block.settings.link | default: routes.all_products_collection_url }}" class="category-card-link" style="position: absolute; inset:0;" aria-label="{{ block.settings.title_3 }}"></a>
+          </div>
+        {% else %}
+          {% assign default_cats = "Decoración y Hogar|Textiles Orgánicos|Cuidado Personal|Velas y Aromaterapia|Accesorios de Bambú|Iluminación Cálida|Vajillas de Cerámica|Organizadores de Madera|Papelería Minimalista|Macetas y Jardines|Baño y Relax|Cocina Sustentable|Movilidad & Botellas|Arte y Cuadros Botánicos|Muebles Auxiliares|Calzado y Confort|Infusiones y Té Orgánico|Accesorios para Mascotas|Juguetes de Madera|Cuidado de la Ropa" | split: "|" %}
+          {% for cat in default_cats %}
+            <div class="category-card">
+              <div class="category-card-content" style="padding: 1.5rem; text-align: center;">
+                <h3 class="title-3" style="font-size: 1.25rem; font-weight: 600; color: var(--color-dark); margin-bottom: 0.4rem;">{{ cat }}</h3>
+                <p class="text-body" style="font-size: 0.85rem; color: var(--color-text-muted);">20 Productos disponible</p>
+              </div>
+              <a href="{{ routes.all_products_collection_url }}" class="category-card-link" style="position: absolute; inset:0;" aria-label="{{ cat }}"></a>
+            </div>
+          {% endfor %}
         {% endfor %}
-      {% endfor %}
+      {%- endif -%}
     </div>
 
     {% if section.settings.show_all_button %}
@@ -66,19 +59,25 @@
       "type": "text",
       "id": "title_2",
       "label": "Título 2 (H2 Principal)",
-      "default": "Explora Nuestras Categorías"
+      "default": "Explora Nuestras 20 Categorías"
     },
     {
       "type": "text",
       "id": "title_3",
       "label": "Título 3 (H3 Subtítulo)",
-      "default": "Encuentra exactamente lo que necesitas para tu espacio"
+      "default": "20 productos meticulosamente seleccionados por cada línea"
     },
     {
       "type": "textarea",
       "id": "text_body",
       "label": "Texto Informativo",
-      "default": "Navega a través de nuestras colecciones diseñadas minuciosamente."
+      "default": "Navega a través de nuestro universo completo de 400 productos sostenibles."
+    },
+    {
+      "type": "checkbox",
+      "id": "use_shopify_collections",
+      "label": "Cargar colecciones reales de la tienda automáticamente",
+      "default": false
     },
     {
       "type": "checkbox",
@@ -117,7 +116,7 @@
           "type": "text",
           "id": "item_count_text",
           "label": "Texto secundario o cantidad",
-          "default": "20 Productos"
+          "default": "20 Productos disponible"
         },
         {
           "type": "image_picker",
@@ -136,10 +135,26 @@
     {
       "name": "4. Menú de Categorías",
       "blocks": [
-        { "type": "category_item", "settings": { "title_3": "Decoración y Hogar", "item_count_text": "20 Productos" } },
-        { "type": "category_item", "settings": { "title_3": "Textiles Orgánicos", "item_count_text": "20 Productos" } },
-        { "type": "category_item", "settings": { "title_3": "Cuidado Personal", "item_count_text": "20 Productos" } },
-        { "type": "category_item", "settings": { "title_3": "Velas y Aromaterapia", "item_count_text": "20 Productos" } }
+        { "type": "category_item", "settings": { "title_3": "Decoración y Hogar", "item_count_text": "20 Productos disponible" } },
+        { "type": "category_item", "settings": { "title_3": "Textiles Orgánicos", "item_count_text": "20 Productos disponible" } },
+        { "type": "category_item", "settings": { "title_3": "Cuidado Personal", "item_count_text": "20 Productos disponible" } },
+        { "type": "category_item", "settings": { "title_3": "Velas y Aromaterapia", "item_count_text": "20 Productos disponible" } },
+        { "type": "category_item", "settings": { "title_3": "Accesorios de Bambú", "item_count_text": "20 Productos disponible" } },
+        { "type": "category_item", "settings": { "title_3": "Iluminación Cálida", "item_count_text": "20 Productos disponible" } },
+        { "type": "category_item", "settings": { "title_3": "Vajillas de Cerámica", "item_count_text": "20 Productos disponible" } },
+        { "type": "category_item", "settings": { "title_3": "Organizadores de Madera", "item_count_text": "20 Productos disponible" } },
+        { "type": "category_item", "settings": { "title_3": "Papelería Minimalista", "item_count_text": "20 Productos disponible" } },
+        { "type": "category_item", "settings": { "title_3": "Macetas y Jardines", "item_count_text": "20 Productos disponible" } },
+        { "type": "category_item", "settings": { "title_3": "Baño y Relax", "item_count_text": "20 Productos disponible" } },
+        { "type": "category_item", "settings": { "title_3": "Cocina Sustentable", "item_count_text": "20 Productos disponible" } },
+        { "type": "category_item", "settings": { "title_3": "Movilidad & Botellas", "item_count_text": "20 Productos disponible" } },
+        { "type": "category_item", "settings": { "title_3": "Arte y Cuadros Botánicos", "item_count_text": "20 Productos disponible" } },
+        { "type": "category_item", "settings": { "title_3": "Muebles Auxiliares", "item_count_text": "20 Productos disponible" } },
+        { "type": "category_item", "settings": { "title_3": "Calzado y Confort", "item_count_text": "20 Productos disponible" } },
+        { "type": "category_item", "settings": { "title_3": "Infusiones y Té Orgánico", "item_count_text": "20 Productos disponible" } },
+        { "type": "category_item", "settings": { "title_3": "Accesorios para Mascotas", "item_count_text": "20 Productos disponible" } },
+        { "type": "category_item", "settings": { "title_3": "Juguetes de Madera", "item_count_text": "20 Productos disponible" } },
+        { "type": "category_item", "settings": { "title_3": "Cuidado de la Ropa", "item_count_text": "20 Productos disponible" } }
       ]
     }
   ]
