@@ -27,10 +27,7 @@
               <div class="product-price">{{ product.price | money }}</div>
             </div>
             
-            <form method="post" action="/cart/add">
-              <input type="hidden" name="id" value="{{ product.variants.first.id }}">
-              <button type="submit" class="btn btn-primary">Añadir al Carrito</button>
-            </form>
+            <a href="{{ product.url }}" class="btn btn-primary" style="text-align: center; text-decoration: none;">Ver Detalle →</a>
           </article>
         {%- endfor -%}
       {%- else -%}
@@ -42,11 +39,11 @@
             </div>
             <div class="product-info">
               <span class="product-category">Categoría {{ i }}</span>
-              <h3 class="title-3">Producto Minimalista Nº {{ i }}</h3>
+              <h3 class="title-3"><a href="producto.html?id={{ 100 | plus: i }}">Producto Minimalista Nº {{ i }}</a></h3>
               <p class="text-body" style="font-size: 0.88rem;">Diseño exclusivo en tonos pastel verdes y marrón claro.</p>
               <div class="product-price">$45.00 USD</div>
             </div>
-            <button class="btn btn-primary" onclick="window.STORE_CART.add(100 + {{ i }}); openCartModal();">Añadir al Carrito</button>
+            <a href="producto.html?id={{ 100 | plus: i }}" class="btn btn-primary" style="text-align: center; text-decoration: none;">Ver Detalle →</a>
           </article>
         {% endfor %}
       {%- endif -%}

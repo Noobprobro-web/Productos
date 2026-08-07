@@ -240,8 +240,8 @@
             <p class="text-body" style="font-size: 0.88rem;">${product.description}</p>
             <div class="product-price">${product.priceFormatted}</div>
           </div>
-          <button class="btn btn-primary" onclick="window.STORE_CART.add(${product.id}); openCartModal();">Añadir al Carrito</button>
-        </article>
+            <a href="producto.html?id=${product.id}" class="btn btn-primary" style="text-align: center; text-decoration: none;">Ver Detalle →</a>
+          </article>
       `).join('');
     }
   </script>
