@@ -1,6 +1,4 @@
-import csv
-import zipfile
-import os
+import csv, zipfile, os
 
 base_dir = r'C:\Users\Johan\OneDrive\Documentos\Drive\Productos'
 export_dir = os.path.join(base_dir, 'csv_exports')
@@ -31,9 +29,23 @@ categories = [
 
 adjectives = ['Artesanal', 'Minimalista', 'Organico', 'Sostenible', 'Botanico', 'Sereno', 'Atelier', 'Escandinavo', 'Pastel', 'Natural', 'Puro', 'Zen', 'Eco', 'Esencial', 'Mate', 'Texturizado']
 
-# 1. Clean CSV without image columns for initial import
-products_no_img_path = os.path.join(export_dir, 'shopify_400_productos_sin_imagenes.csv')
-with open(products_no_img_path, 'w', newline='', encoding='utf-8') as f:
+first_names = ['Maria', 'Javier', 'Sofia', 'Camila', 'Carlos', 'Valeria', 'Diego', 'Lucia', 'Andres', 'Elena', 'Mateo', 'Valentina', 'Santiago', 'Isabella', 'Gabriel', 'Daniela']
+last_initials = ['R.', 'G.', 'L.', 'M.', 'S.', 'P.', 'H.', 'V.', 'B.', 'T.', 'C.']
+review_titles = ['Calidad insuperable', 'Elegante y funcional', 'Me encanto el diseno', 'Excelente atencion y empaque', 'Supero mis expectativas', 'Textura increible', '100% recomendado', 'Diseno minimalista puro']
+review_bodies = [
+  'El producto llego super rapido y en empaque sustentable. La calidad es increible y el color pastel combina perfecto con mi decoracion.',
+  'Textura suave y acabados impecables. Se nota que es un producto artesanal hecho con dedicacion.',
+  'La mejor compra del mes. Le dio un aire de calma y elegancia a mi espacio. Volvere a comprar definitivamente.',
+  'Cumple al 100% con la descripcion. El material es resistente y el tono verde/marron pastel es hermoso.'
+]
+
+variants = [
+  ('Verde Soft Natural', 0),
+  ('Marron Tierra Pastel', 3.50)
+]
+
+products_with_variants_csv_path = os.path.join(export_dir, 'shopify_400_productos_con_variantes.csv')
+with open(products_with_variants_csv_path, 'w', newline='', encoding='utf-8') as f:
     writer = csv.writer(f)
     writer.writerow([
         'Handle', 'Title', 'Body (HTML)', 'Vendor', 'Type', 'Tags', 'Published',
@@ -54,25 +66,38 @@ with open(products_no_img_path, 'w', newline='', encoding='utf-8') as f:
             clean_adj = adj.lower()
             handle = cat_id + '-' + clean_noun + '-' + clean_adj + '-' + str(i)
             description = '<p>Exquisito ' + noun.lower() + ' elaborado artesanalmente. Tonos pastel suaves en verde y marron natural para la armonia de tu espacio.</p>'
-            price = round(18 + (i * 3.5) + (prod_id % 25), 2)
-            sku = 'ATL-' + cat_id[:3].upper() + '-' + str(prod_id)
+            base_price = round(18 + (i * 3.5) + (prod_id % 25), 2)
             
-            writer.writerow([
-                handle, title, description, 'Atelier Store', cat_name, cat_name + ', Minimalist, Eco, Atelier', 'TRUE',
-                'Title', 'Default Title', sku, 450,
-                'shopify', 50, 'deny',
-                'manual', price, '',
-                'TRUE', 'TRUE', '',
-                'FALSE', title, 'Comprar ' + title + ' en Atelier Minimal Store.',
-                'active'
-            ])
+            for v_index, (v_name, v_extra) in enumerate(variants):
+                price = round(base_price + v_extra, 2)
+                sku = 'ATL-' + cat_id[:3].upper() + '-' + str(prod_id) + ('-V' if v_index == 0 else '-M')
+                
+                if v_index == 0:
+                    writer.writerow([
+                        handle, title, description, 'Atelier Store', cat_name, cat_name + ', Minimalist, Eco, Atelier', 'TRUE',
+                        'Tono / Acabado', v_name, sku, 450,
+                        'shopify', 50, 'deny',
+                        'manual', price, '',
+                        'TRUE', 'TRUE', '',
+                        'FALSE', title, 'Comprar ' + title + ' en Atelier Minimal Store.',
+                        'active'
+                    ])
+                else:
+                    writer.writerow([
+                        handle, '', '', '', '', '', '',
+                        'Tono / Acabado', v_name, sku, 450,
+                        'shopify', 50, 'deny',
+                        'manual', price, '',
+                        'TRUE', 'TRUE', '',
+                        '', '', '',
+                        ''
+                    ])
             prod_id += 1
 
-# Update ZIP
 zip_path = os.path.join(base_dir, 'Archivos_Importacion_Shopify_Atelier.zip')
 reviews_csv_path = os.path.join(export_dir, 'shopify_resenas_400_productos.csv')
 with zipfile.ZipFile(zip_path, 'w', zipfile.ZIP_DEFLATED) as zipf:
-    zipf.write(products_no_img_path, os.path.basename(products_no_img_path))
+    zipf.write(products_with_variants_csv_path, os.path.basename(products_with_variants_csv_path))
     zipf.write(reviews_csv_path, os.path.basename(reviews_csv_path))
 
-print("CSV sin columnas de imagenes creado exitosamente.")
+print("CSV con Variantes (800 variantes para 400 productos) creado exitosamente.")
