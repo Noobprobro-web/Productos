@@ -41,6 +41,13 @@ review_bodies = [
   'Cumple al 100% con la descripcion. El material es resistente y el tono verde/marron pastel es hermoso.'
 ]
 
+# Public CDN placeholder image URLs
+PLACEHOLDER_IMAGES = [
+  "https://cdn.shopify.com/s/files/1/0533/2089/files/placeholder-images-image_large.png",
+  "https://cdn.shopify.com/s/files/1/0533/2089/files/placeholder-images-lifestyle-1_large.png",
+  "https://cdn.shopify.com/s/files/1/0533/2089/files/placeholder-images-product-1_large.png"
+]
+
 products_csv_path = os.path.join(export_dir, 'shopify_400_productos_atelier.csv')
 with open(products_csv_path, 'w', newline='', encoding='utf-8') as f:
     writer = csv.writer(f)
@@ -66,6 +73,7 @@ with open(products_csv_path, 'w', newline='', encoding='utf-8') as f:
             description = '<p>Exquisito ' + noun.lower() + ' elaborado artesanalmente. Tonos pastel suaves en verde y marron natural para la armonia de tu espacio.</p>'
             price = round(18 + (i * 3.5) + (prod_id % 25), 2)
             sku = 'ATL-' + cat_id[:3].upper() + '-' + str(prod_id)
+            img_src = PLACEHOLDER_IMAGES[prod_id % len(PLACEHOLDER_IMAGES)]
             
             writer.writerow([
                 handle, title, description, 'Atelier Store', cat_name, cat_name + ', Minimalist, Eco, Atelier', 'TRUE',
@@ -73,7 +81,7 @@ with open(products_csv_path, 'w', newline='', encoding='utf-8') as f:
                 'shopify', 50, 'deny',
                 'manual', price, '',
                 'TRUE', 'TRUE', '',
-                '', 1, title, 'FALSE', title, 'Comprar ' + title + ' en Atelier Minimal Store.',
+                img_src, 1, title, 'FALSE', title, 'Comprar ' + title + ' en Atelier Minimal Store.',
                 'active'
             ])
             prod_id += 1
@@ -113,4 +121,4 @@ with zipfile.ZipFile(zip_path, 'w', zipfile.ZIP_DEFLATED) as zipf:
     zipf.write(products_csv_path, os.path.basename(products_csv_path))
     zipf.write(reviews_csv_path, os.path.basename(reviews_csv_path))
 
-print("ZIP generado con exito en:", zip_path)
+print("ZIP y CSVs con Image Src corregidos exitosamente.")
