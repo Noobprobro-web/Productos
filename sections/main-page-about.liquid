@@ -1,103 +1,64 @@
-<section class="page-header-banner">
-  <div class="container">
+<div class="container" style="padding: 4rem 1.5rem;">
+  <div class="about-hero-text">
     <h1 class="title-1">{{ page.title | default: "Quiénes Somos" }}</h1>
-    <h2 class="title-2">Diseño intencional para una vida más serena y consciente</h2>
-  </div>
-</section>
-
-<!-- SECCIÓN 1: INTRODUCCIÓN Y MANIFIESTO -->
-<section class="container about-hero">
-  <div class="hero-content">
-    <span class="hero-badge">Fundada en 2024</span>
     <h2 class="title-2">{{ section.settings.intro_title | default: "Creemos en la belleza de lo esencial" }}</h2>
-    <p class="text-body">
-      {{ section.settings.intro_text_1 | default: "Atelier nació de la firme creencia de que nuestro entorno físico influye directamente en nuestro bienestar mental. Eliminamos el exceso para enfocarnos en líneas puras, materiales duraderos y tonalidades que calman los sentidos." }}
-    </p>
-    <p class="text-body">
-      {{ section.settings.intro_text_2 | default: "Nuestra paleta inspirada en verde suave y marrón tierra busca conectar tu espacio interior con la serenidad de la naturaleza." }}
-    </p>
   </div>
-  <div class="hero-media">
-    {% if section.settings.intro_image != blank %}
-      <img src="{{ section.settings.intro_image | image_url: width: 600 }}" alt="{{ section.settings.intro_title | escape }}" loading="lazy">
-    {% else %}
-      <div class="placeholder-box" style="min-height: 380px;">
-        <p>IMAGEN DE NUESTRO TALLER</p>
-        <span>Fotografía artesanal / Historia de la marca</span>
-      </div>
-    {% endif %}
-  </div>
-</section>
 
-<!-- SECCIÓN 2: PILARES Y VALORES -->
-<section class="section-categories">
-  <div class="container">
-    <div class="section-header">
-      <h2 class="title-2">Nuestros Pilares</h2>
-      <h3 class="title-3">Lo que guía cada decisión de diseño</h3>
+  <div class="about-grid" style="margin-top: 3rem;">
+    <div class="about-content">
+      <h3 class="title-3">Nuestra Filosofía Atelier</h3>
+      <p class="text-body">
+        {{ section.settings.intro_text_1 | default: "Atelier nació de la firme creencia de que nuestro entorno físico influye directamente en nuestro bienestar mental. Eliminamos el ruido visual sobrante para ofrecer piezas con propósito, geometría limpia y materiales responsables." }}
+      </p>
+      <p class="text-body">
+        {{ section.settings.intro_text_2 | default: "Nuestra paleta inspirada en verde suave y marrón tierra busca conectar tu espacio interior con la serenidad de la naturaleza." }}
+      </p>
     </div>
 
-    <div class="values-grid">
-      <div class="value-card">
-        <div class="value-icon">
-          {% render 'icon-heart' %}
+    <div class="about-media">
+      {% if section.settings.intro_image != blank %}
+        <img src="{{ section.settings.intro_image | image_url: width: 600 }}" alt="Taller Atelier" loading="lazy" style="border-radius: var(--radius-md); width:100%;">
+      {% else %}
+        <div class="placeholder-box" style="min-height: 320px;">
+          <p>IMAGEN DEL TALLER / EQUIPO</p>
+          <span>Fotografía artesanal en tonos pastel</span>
         </div>
-        <h3 class="title-3">Sostenibilidad Real</h3>
-        <p class="text-body" style="font-size: 0.88rem; margin-top: 0.5rem;">Materiales 100% orgánicos, reciclables y de origen ético.</p>
-      </div>
-
-      <div class="value-card">
-        <div class="value-icon">
-          {% render 'icon-search' %}
-        </div>
-        <h3 class="title-3">Artesanía Detallada</h3>
-        <p class="text-body" style="font-size: 0.88rem; margin-top: 0.5rem;">Cada objeto pasa por un riguroso control de calidad antes de llegar a ti.</p>
-      </div>
-
-      <div class="value-card">
-        <div class="value-icon">
-          {% render 'icon-cart' %}
-        </div>
-        <h3 class="title-3">Diseño Atemporal</h3>
-        <p class="text-body" style="font-size: 0.88rem; margin-top: 0.5rem;">Piezas pensadas para trascender modas pasajeras y perdurar en el tiempo.</p>
-      </div>
+      {% endif %}
     </div>
   </div>
-</section>
 
-<!-- SECCIÓN 3: LÍNEA DE TIEMPO / TRAYECTORIA -->
-<section class="section-reviews" style="background-color: var(--color-bg);">
-  <div class="container">
-    <div class="section-header">
+  <!-- Timeline Section -->
+  <div class="about-timeline" style="margin-top: 5rem;">
+    <div class="section-header" style="text-align: center;">
       <h2 class="title-2">Nuestra Trayectoria</h2>
-      <h3 class="title-3">El camino hacia la simplicidad intencional</h3>
+      <h3 class="title-3">El camino hacia la simplicidad</h3>
     </div>
 
-    <div class="timeline-grid">
-      <div class="timeline-card">
-        <div class="timeline-year">2024</div>
-        <h3 class="title-3">El Nacimiento</h3>
-        <p class="text-body" style="font-size:0.88rem; margin-top:0.4rem;">Comenzamos con una colección cápsula de 10 jarrones de cerámica modelados a mano.</p>
+    <div class="timeline-grid" style="margin-top: 3rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 2rem;">
+      <div class="timeline-card" style="background: var(--color-surface); padding: 2rem; border-radius: var(--radius-md); border: 1px solid rgba(0,0,0,0.05);">
+        <span style="font-family: var(--font-heading); font-size: 2rem; font-weight: 700; color: var(--color-green-dark);">2022</span>
+        <h3 class="title-3" style="margin-top: 0.5rem;">El Origen</h3>
+        <p class="text-body" style="font-size: 0.9rem;">Fundación del primer taller de artesanía funcional enfocada en tonos naturales.</p>
       </div>
 
-      <div class="timeline-card">
-        <div class="timeline-year">2025</div>
-        <h3 class="title-3">Lino & Bambú</h3>
-        <p class="text-body" style="font-size:0.88rem; margin-top:0.4rem;">Expandimos hacia textiles 100% orgánicos y accesorios de bambú sustentable.</p>
+      <div class="timeline-card" style="background: var(--color-surface); padding: 2rem; border-radius: var(--radius-md); border: 1px solid rgba(0,0,0,0.05);">
+        <span style="font-family: var(--font-heading); font-size: 2rem; font-weight: 700; color: var(--color-green-dark);">2024</span>
+        <h3 class="title-3" style="margin-top: 0.5rem;">Expansión Verde</h3>
+        <p class="text-body" style="font-size: 0.9rem;">Lanzamiento de las líneas de decoración, textiles orgánicos y cuidado personal.</p>
       </div>
 
-      <div class="timeline-card">
-        <div class="timeline-year">2026</div>
-        <h3 class="title-3">Universo Atelier</h3>
-        <p class="text-body" style="font-size:0.88rem; margin-top:0.4rem;">Llegamos a 20 categorías integrales con 400 productos en tonos pastel verde y tierra.</p>
+      <div class="timeline-card" style="background: var(--color-surface); padding: 2rem; border-radius: var(--radius-md); border: 1px solid rgba(0,0,0,0.05);">
+        <span style="font-family: var(--font-heading); font-size: 2rem; font-weight: 700; color: var(--color-green-dark);">2026</span>
+        <h3 class="title-3" style="margin-top: 0.5rem;">Comunidad Global</h3>
+        <p class="text-body" style="font-size: 0.9rem;">Más de 20 categorías y 400 productos pensados para enriquecer cada hogar.</p>
       </div>
     </div>
   </div>
-</section>
+</div>
 
 {% schema %}
 {
-  "name": "Quiénes Somos / Manifiesto",
+  "name": "Quiénes Somos",
   "settings": [
     {
       "type": "text",
@@ -125,7 +86,7 @@
   ],
   "presets": [
     {
-      "name": "Quiénes Somos / Manifiesto"
+      "name": "Quiénes Somos"
     }
   ]
 }
