@@ -1,0 +1,56 @@
+<div class="announcement-bar">
+  {{ section.settings.announcement_text | default: "✨ Envíos gratis a todo el país en compras superiores a $50 | 100% Ecológico y Sostenible" }}
+</div>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="{{ routes.root_url }}" class="logo">
+      {%- if section.settings.logo_text != blank -%}
+        {{ section.settings.logo_text }}<span>.</span>
+      {%- else -%}
+        ATELIER<span>.</span>
+      {%- endif -%}
+    </a>
+    <nav class="main-nav">
+      <ul>
+        {%- for link in section.settings.menu.links -%}
+          <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+        {%- else -%}
+          <li><a href="#hero">Inicio</a></li>
+          <li><a href="#mas-vendidos">Más Vendidos</a></li>
+          <li><a href="#categorias">Categorías</a></li>
+          <li><a href="#reseñas">Reseñas</a></li>
+        {%- endfor -%}
+      </ul>
+    </nav>
+    <div class="header-actions">
+      <button class="icon-btn" aria-label="Buscar">🔍</button>
+      <a href="{{ routes.cart_url }}" class="icon-btn" aria-label="Carrito">🛒</a>
+    </div>
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "Header & Barra Superior",
+  "settings": [
+    {
+      "type": "text",
+      "id": "announcement_text",
+      "label": "Texto del anuncio",
+      "default": "✨ Envíos gratis a todo el país en compras superiores a $50 | 100% Ecológico y Sostenible"
+    },
+    {
+      "type": "text",
+      "id": "logo_text",
+      "label": "Texto del Logo",
+      "default": "ATELIER"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Menú principal"
+    }
+  ]
+}
+{% endschema %}

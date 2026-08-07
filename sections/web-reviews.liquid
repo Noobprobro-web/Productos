@@ -1,0 +1,140 @@
+<section id="reseñas" class="section-reviews">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="title-2">{{ section.settings.title_2 | default: "Lo que Dicen Nuestros Clientes" }}</h2>
+      <h3 class="title-3">{{ section.settings.title_3 | default: "Experiencias reales con nuestros productos" }}</h3>
+      <p class="text-body">{{ section.settings.text_body | default: "La satisfacción de quienes ya disfrutan de nuestra colección minimalista." }}</p>
+    </div>
+
+    <div class="reviews-grid">
+      {% for block in section.blocks %}
+        <article class="review-card" {{ block.shopify_attributes }}>
+          <div class="stars">★★★★★</div>
+          <h3 class="title-3">{{ block.settings.title_3 | default: "Excelente Experiencia" }}</h3>
+          <p class="review-text">"{{ block.settings.review_text | default: "El producto llegó a tiempo y la calidad es insuperable. Totalmente recomendado." }}"</p>
+          <div class="author-info">
+            <div class="author-avatar">{{ block.settings.author_initials | default: "CL" }}</div>
+            <div class="author-details">
+              <p>{{ block.settings.author_name | default: "Cliente Satisfecho" }}</p>
+              <span>{{ block.settings.author_badge | default: "Cliente Verificado" }}</span>
+            </div>
+          </div>
+        </article>
+      {% else %}
+        <!-- Fallback static reviews -->
+        <article class="review-card">
+          <div class="stars">★★★★★</div>
+          <h3 class="title-3">"Calidad y elegancia pura"</h3>
+          <p class="review-text">"El jarrón de cerámica superó mis expectativas. El tono verde pastel es exactamente como en las fotos y le dio un aire cálido y minimalista a mi sala."</p>
+          <div class="author-info">
+            <div class="author-avatar">MC</div>
+            <div class="author-details">
+              <p>María Camila R.</p>
+              <span>Cliente Verificado</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="review-card">
+          <div class="stars">★★★★★</div>
+          <h3 class="title-3">"Textiles increíbles"</h3>
+          <p class="review-text">"Compré la manta de lino y no puedo estar más contento. El color marrón suave combina perfecto con todo y la textura es extremadamente suave."</p>
+          <div class="author-info">
+            <div class="author-avatar">JG</div>
+            <div class="author-details">
+              <p>Javier G.</p>
+              <span>Cliente Verificado</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="review-card">
+          <div class="stars">★★★★★</div>
+          <h3 class="title-3">"Excelente atención y empaque"</h3>
+          <p class="review-text">"El envío fue rapidísimo y el empaque ecológico un 10/10. Da gusto comprar marcas que cuidan cada detalle visual y ambiental."</p>
+          <div class="author-info">
+            <div class="author-avatar">SL</div>
+            <div class="author-details">
+              <p>Sofia L.</p>
+              <span>Cliente Verificado</span>
+            </div>
+          </div>
+        </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "5. Reseñas de la Web",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title_2",
+      "label": "Título 2 (H2 Principal)",
+      "default": "Lo que Dicen Nuestros Clientes"
+    },
+    {
+      "type": "text",
+      "id": "title_3",
+      "label": "Título 3 (H3 Subtítulo)",
+      "default": "Experiencias reales con nuestros productos"
+    },
+    {
+      "type": "textarea",
+      "id": "text_body",
+      "label": "Texto Descriptivo",
+      "default": "La satisfacción de quienes ya disfrutan de nuestra colección minimalista."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "review_item",
+      "name": "Reseña de Cliente",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title_3",
+          "label": "Título 3 de la reseña",
+          "default": "Calidad insuperable"
+        },
+        {
+          "type": "textarea",
+          "id": "review_text",
+          "label": "Contenido de la reseña",
+          "default": "Me encantó el producto. La atención al cliente fue fantástica."
+        },
+        {
+          "type": "text",
+          "id": "author_name",
+          "label": "Nombre del cliente",
+          "default": "Laura G."
+        },
+        {
+          "type": "text",
+          "id": "author_initials",
+          "label": "Iniciales para Avatar",
+          "default": "LG"
+        },
+        {
+          "type": "text",
+          "id": "author_badge",
+          "label": "Etiqueta del cliente",
+          "default": "Comprador Verificado"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "5. Reseñas de la Web",
+      "blocks": [
+        { "type": "review_item", "settings": { "title_3": "Calidad y elegancia pura", "author_name": "María Camila R.", "author_initials": "MC" } },
+        { "type": "review_item", "settings": { "title_3": "Textiles increíbles", "author_name": "Javier G.", "author_initials": "JG" } },
+        { "type": "review_item", "settings": { "title_3": "Excelente atención y empaque", "author_name": "Sofia L.", "author_initials": "SL" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,58 @@
+<section class="section-ticker">
+  <div class="ticker-track">
+    {% for block in section.blocks %}
+      <div class="ticker-item" {{ block.shopify_attributes }}>
+        {% if block.settings.image != blank %}
+          <img src="{{ block.settings.image | image_url: width: 100 }}" alt="{{ block.settings.text }}" style="width: 45px; height: 45px; border-radius: 50%; object-fit: cover;">
+        {% else %}
+          <div class="ticker-img-placeholder">IMG</div>
+        {% endif %}
+        <span class="ticker-text">{{ block.settings.text | default: "Tipo de Producto" }}</span>
+      </div>
+    {% else %}
+      <!-- Default fallback items -->
+      <div class="ticker-item"><div class="ticker-img-placeholder">IMG</div><span class="ticker-text">Cuidado Personal</span></div>
+      <div class="ticker-item"><div class="ticker-img-placeholder">IMG</div><span class="ticker-text">Decoración Minimal</span></div>
+      <div class="ticker-item"><div class="ticker-img-placeholder">IMG</div><span class="ticker-text">Textiles Orgánicos</span></div>
+      <div class="ticker-item"><div class="ticker-img-placeholder">IMG</div><span class="ticker-text">Accesorios de Bambú</span></div>
+      <div class="ticker-item"><div class="ticker-img-placeholder">IMG</div><span class="ticker-text">Velas de Cera Natural</span></div>
+    {% endfor %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "2. Banner Tipos Producto",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "type_item",
+      "name": "Tipo de Producto",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Nombre del tipo de producto",
+          "default": "Tipo de Producto"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Icono o Imagen del tipo"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "2. Banner Tipos Producto",
+      "blocks": [
+        { "type": "type_item", "settings": { "text": "Cuidado Personal" } },
+        { "type": "type_item", "settings": { "text": "Decoración Minimal" } },
+        { "type": "type_item", "settings": { "text": "Textiles Orgánicos" } },
+        { "type": "type_item", "settings": { "text": "Accesorios de Bambú" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

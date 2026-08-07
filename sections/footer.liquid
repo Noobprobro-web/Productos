@@ -1,0 +1,75 @@
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <a href="{{ routes.root_url }}" class="logo" style="color: var(--color-white);">
+          {{ section.settings.brand_text | default: "ATELIER" }}<span style="color: var(--color-green-accent);">.</span>
+        </a>
+        <p style="margin-top: 1rem;">
+          {{ section.settings.about_text | default: "Creando objetos cotidianos con un enfoque minimalista, tonos armoniosos e inspiración natural." }}
+        </p>
+      </div>
+
+      <div class="footer-col">
+        <h3 class="title-3">Navegación</h3>
+        <ul class="footer-links">
+          <li><a href="#hero">Inicio</a></li>
+          <li><a href="#mas-vendidos">Más Vendidos</a></li>
+          <li><a href="#categorias">Categorías</a></li>
+          <li><a href="#reseñas">Reseñas</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h3 class="title-3">Ayuda</h3>
+        <ul class="footer-links">
+          <li><a href="#">Preguntas Frecuentes</a></li>
+          <li><a href="#">Envíos y Devoluciones</a></li>
+          <li><a href="#">Contacto</a></li>
+          <li><a href="#">Términos y Condiciones</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h3 class="title-3">Únete al Club</h3>
+        <p>{{ section.settings.newsletter_text | default: "Recibe noticias exclusivas y un 10% de descuento en tu primera compra." }}</p>
+        {% form 'customer', class: 'newsletter-form' %}
+          <input type="hidden" name="contact[tags]" value="newsletter">
+          <input type="email" name="contact[email]" class="newsletter-input" placeholder="Tu correo electrónico" required>
+          <button type="submit" class="btn btn-primary" style="padding: 0.7rem 1rem;">Suscribirme</button>
+        {% endform %}
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© {{ 'now' | date: "%Y" }} {{ shop.name | default: "Atelier Minimal Store" }}. Todos los derechos reservados.</p>
+      <p>Diseñado para Shopify & GitHub Integration</p>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    {
+      "type": "text",
+      "id": "brand_text",
+      "label": "Nombre de la marca",
+      "default": "ATELIER"
+    },
+    {
+      "type": "textarea",
+      "id": "about_text",
+      "label": "Texto sobre la marca",
+      "default": "Creando objetos cotidianos con un enfoque minimalista, tonos armoniosos e inspiración natural."
+    },
+    {
+      "type": "text",
+      "id": "newsletter_text",
+      "label": "Texto del Boletín",
+      "default": "Recibe noticias exclusivas y un 10% de descuento en tu primera compra."
+    }
+  ]
+}
+{% endschema %}

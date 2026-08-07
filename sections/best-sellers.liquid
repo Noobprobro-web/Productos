@@ -1,0 +1,101 @@
+<section id="mas-vendidos" class="section-best-sellers">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="title-2">{{ section.settings.title_2 | default: "Productos Más Vendidos" }}</h2>
+      <h3 class="title-3">{{ section.settings.title_3 | default: "Los favoritos de nuestra comunidad" }}</h3>
+      <p class="text-body">{{ section.settings.text_body | default: "Selección de piezas destacadas elegidas por su excepcional diseño y durabilidad." }}</p>
+    </div>
+
+    <div class="products-grid">
+      {%- assign collection = section.settings.collection -%}
+      {%- if collection != blank and collection.products.size > 0 -%}
+        {%- for product in collection.products limit: section.settings.products_to_show -%}
+          <article class="product-card">
+            {%- if product.featured_image != blank -%}
+              <img src="{{ product.featured_image | image_url: width: 500 }}" alt="{{ product.title | escape }}" loading="lazy" width="500" height="500">
+            {%- else -%}
+              <div class="placeholder-box">
+                <p>IMAGEN DEL PRODUCTO</p>
+                <span>Imagen de {{ product.title }}</span>
+              </div>
+            {%- endif -%}
+            
+            <div class="product-info">
+              <span class="product-category">{{ product.type | default: "Colección" }}</span>
+              <h3 class="title-3">{{ product.title }}</h3>
+              <p class="text-body" style="font-size: 0.88rem;">{{ product.description | strip_html | truncate: 75 }}</p>
+              <div class="product-price">{{ product.price | money }}</div>
+            </div>
+            
+            <form method="post" action="/cart/add">
+              <input type="hidden" name="id" value="{{ product.variants.first.id }}">
+              <button type="submit" class="btn btn-primary">Añadir al Carrito</button>
+            </form>
+          </article>
+        {%- endfor -%}
+      {%- else -%}
+        <!-- Fallback static products for design preview -->
+        {% for i in (1..4) %}
+          <article class="product-card">
+            <div class="placeholder-box">
+              <p>IMAGEN DEL PRODUCTO</p>
+              <span>Imagen del producto {{ i }}</span>
+            </div>
+            <div class="product-info">
+              <span class="product-category">Categoría {{ i }}</span>
+              <h3 class="title-3">Producto Minimalista Nº {{ i }}</h3>
+              <p class="text-body" style="font-size: 0.88rem;">Diseño exclusivo en tonos pastel verdes y marrón claro.</p>
+              <div class="product-price">$45.00 USD</div>
+            </div>
+            <button class="btn btn-primary">Añadir al Carrito</button>
+          </article>
+        {% endfor %}
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "3. Productos Más Vendidos",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title_2",
+      "label": "Título 2 (H2 Principal)",
+      "default": "Productos Más Vendidos"
+    },
+    {
+      "type": "text",
+      "id": "title_3",
+      "label": "Título 3 (H3 Secundario)",
+      "default": "Los favoritos de nuestra comunidad"
+    },
+    {
+      "type": "textarea",
+      "id": "text_body",
+      "label": "Texto Descriptivo",
+      "default": "Selección de piezas destacadas elegidas por su excepcional diseño y durabilidad."
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Colección a Mostrar"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "min": 2,
+      "max": 8,
+      "step": 1,
+      "default": 4,
+      "label": "Cantidad de productos a mostrar"
+    }
+  ],
+  "presets": [
+    {
+      "name": "3. Productos Más Vendidos"
+    }
+  ]
+}
+{% endschema %}

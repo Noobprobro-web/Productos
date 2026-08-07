@@ -1,0 +1,100 @@
+<section id="hero" class="section-hero">
+  <div class="container hero-grid">
+    <div class="hero-content">
+      {% if section.settings.badge != blank %}
+        <span class="hero-badge">{{ section.settings.badge }}</span>
+      {% endif %}
+      
+      <h1 class="title-1">{{ section.settings.title_1 | default: "Diseño Minimalista para tu Estilo de Vida" }}</h1>
+      <h2 class="title-2">{{ section.settings.title_2 | default: "Crea espacios serenos con nuestra nueva línea de productos sostenibles." }}</h2>
+      
+      <p class="text-body">
+        {{ section.settings.text_body | default: "Diseñamos objetos pensados para perdurar. Cada pieza combina funcionalidad pura y estética natural para transformar tu día a día en una experiencia de calma." }}
+      </p>
+
+      <div style="margin-top: 1rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+        {% if section.settings.btn_1_text != blank %}
+          <a href="{{ section.settings.btn_1_link | default: '#mas-vendidos' }}" class="btn btn-primary">{{ section.settings.btn_1_text }}</a>
+        {% endif %}
+        {% if section.settings.btn_2_text != blank %}
+          <a href="{{ section.settings.btn_2_link | default: '#categorias' }}" class="btn btn-secondary">{{ section.settings.btn_2_text }}</a>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="hero-media">
+      {% if section.settings.image != blank %}
+        <img src="{{ section.settings.image | image_url: width: 800 }}" alt="{{ section.settings.title_1 | escape }}" loading="eager" width="800" height="600">
+      {% else %}
+        <div class="placeholder-box">
+          <p>IMAGEN DE BIENVENIDA</p>
+          <span>Fondo de la sección hero / Fotografía lifestyle principal</span>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "1. Imagen & Textos Hero",
+  "settings": [
+    {
+      "type": "text",
+      "id": "badge",
+      "label": "Insignia o Subtítulo Superior",
+      "default": "Colección Esencial 2026"
+    },
+    {
+      "type": "text",
+      "id": "title_1",
+      "label": "Título 1 (H1 Principal)",
+      "default": "Diseño Minimalista para tu Estilo de Vida"
+    },
+    {
+      "type": "text",
+      "id": "title_2",
+      "label": "Título 2 (H2 Secundario)",
+      "default": "Crea espacios serenos con nuestra nueva línea de productos sostenibles."
+    },
+    {
+      "type": "textarea",
+      "id": "text_body",
+      "label": "Texto Informativo",
+      "default": "Diseñamos objetos pensados para perdurar. Cada pieza combina funcionalidad pura y estética natural para transformar tu día a día en una experiencia de calma."
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Imagen de bienvenida"
+    },
+    {
+      "type": "text",
+      "id": "btn_1_text",
+      "label": "Texto Botón 1",
+      "default": "Explorar Colección"
+    },
+    {
+      "type": "url",
+      "id": "btn_1_link",
+      "label": "Enlace Botón 1"
+    },
+    {
+      "type": "text",
+      "id": "btn_2_text",
+      "label": "Texto Botón 2",
+      "default": "Ver Categorías"
+    },
+    {
+      "type": "url",
+      "id": "btn_2_link",
+      "label": "Enlace Botón 2"
+    }
+  ],
+  "presets": [
+    {
+      "name": "1. Imagen & Textos Hero"
+    }
+  ]
+}
+{% endschema %}

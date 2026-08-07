@@ -1,0 +1,51 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero-welcome",
+      "settings": {
+        "badge": "Colección Esencial 2026",
+        "title_1": "Diseño Minimalista para tu Estilo de Vida",
+        "title_2": "Crea espacios serenos con nuestra nueva línea de productos sostenibles.",
+        "text_body": "Diseñamos objetos pensados para perdurar. Cada pieza combina funcionalidad pura y estética natural para transformar tu día a día en una experiencia de calma.",
+        "btn_1_text": "Explorar Colección",
+        "btn_1_link": "#mas-vendidos",
+        "btn_2_text": "Ver Categorías",
+        "btn_2_link": "#categorias"
+      }
+    },
+    "ticker": {
+      "type": "product-types-ticker"
+    },
+    "best_sellers": {
+      "type": "best-sellers",
+      "settings": {
+        "title_2": "Productos Más Vendidos",
+        "title_3": "Los favoritos de nuestra comunidad",
+        "text_body": "Selección de piezas destacadas elegidas por su excepcional diseño y durabilidad."
+      }
+    },
+    "categories": {
+      "type": "category-menu",
+      "settings": {
+        "title_2": "Explora por Categorías",
+        "title_3": "Encuentra exactamente lo que necesitas para tu espacio",
+        "text_body": "Navega a través de nuestras colecciones diseñadas minuciosamente."
+      }
+    },
+    "reviews": {
+      "type": "web-reviews",
+      "settings": {
+        "title_2": "Lo que Dicen Nuestros Clientes",
+        "title_3": "Experiencias reales con nuestros productos",
+        "text_body": "La satisfacción de quienes ya disfrutan de nuestra colección minimalista."
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "ticker",
+    "best_sellers",
+    "categories",
+    "reviews"
+  ]
+}
