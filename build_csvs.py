@@ -31,25 +31,9 @@ categories = [
 
 adjectives = ['Artesanal', 'Minimalista', 'Organico', 'Sostenible', 'Botanico', 'Sereno', 'Atelier', 'Escandinavo', 'Pastel', 'Natural', 'Puro', 'Zen', 'Eco', 'Esencial', 'Mate', 'Texturizado']
 
-first_names = ['Maria', 'Javier', 'Sofia', 'Camila', 'Carlos', 'Valeria', 'Diego', 'Lucia', 'Andres', 'Elena', 'Mateo', 'Valentina', 'Santiago', 'Isabella', 'Gabriel', 'Daniela']
-last_initials = ['R.', 'G.', 'L.', 'M.', 'S.', 'P.', 'H.', 'V.', 'B.', 'T.', 'C.']
-review_titles = ['Calidad insuperable', 'Elegante y funcional', 'Me encanto el diseno', 'Excelente atencion y empaque', 'Supero mis expectativas', 'Textura increible', '100% recomendado', 'Diseno minimalista puro']
-review_bodies = [
-  'El producto llego super rapido y en empaque sustentable. La calidad es increible y el color pastel combina perfecto con mi decoracion.',
-  'Textura suave y acabados impecables. Se nota que es un producto artesanal hecho con dedicacion.',
-  'La mejor compra del mes. Le dio un aire de calma y elegancia a mi espacio. Volvere a comprar definitivamente.',
-  'Cumple al 100% con la descripcion. El material es resistente y el tono verde/marron pastel es hermoso.'
-]
-
-# Public CDN placeholder image URLs
-PLACEHOLDER_IMAGES = [
-  "https://cdn.shopify.com/s/files/1/0533/2089/files/placeholder-images-image_large.png",
-  "https://cdn.shopify.com/s/files/1/0533/2089/files/placeholder-images-lifestyle-1_large.png",
-  "https://cdn.shopify.com/s/files/1/0533/2089/files/placeholder-images-product-1_large.png"
-]
-
-products_csv_path = os.path.join(export_dir, 'shopify_400_productos_atelier.csv')
-with open(products_csv_path, 'w', newline='', encoding='utf-8') as f:
+# 1. Clean CSV without image columns for initial import
+products_no_img_path = os.path.join(export_dir, 'shopify_400_productos_sin_imagenes.csv')
+with open(products_no_img_path, 'w', newline='', encoding='utf-8') as f:
     writer = csv.writer(f)
     writer.writerow([
         'Handle', 'Title', 'Body (HTML)', 'Vendor', 'Type', 'Tags', 'Published',
@@ -57,8 +41,7 @@ with open(products_csv_path, 'w', newline='', encoding='utf-8') as f:
         'Variant Inventory Tracker', 'Variant Inventory Qty', 'Variant Inventory Policy',
         'Variant Fulfillment Service', 'Variant Price', 'Variant Compare At Price',
         'Variant Requires Shipping', 'Variant Taxable', 'Variant Barcode',
-        'Image Src', 'Image Position', 'Image Alt Text', 'Gift Card', 'SEO Title', 'SEO Description',
-        'Status'
+        'Gift Card', 'SEO Title', 'SEO Description', 'Status'
     ])
     
     prod_id = 101
@@ -73,7 +56,6 @@ with open(products_csv_path, 'w', newline='', encoding='utf-8') as f:
             description = '<p>Exquisito ' + noun.lower() + ' elaborado artesanalmente. Tonos pastel suaves en verde y marron natural para la armonia de tu espacio.</p>'
             price = round(18 + (i * 3.5) + (prod_id % 25), 2)
             sku = 'ATL-' + cat_id[:3].upper() + '-' + str(prod_id)
-            img_src = PLACEHOLDER_IMAGES[prod_id % len(PLACEHOLDER_IMAGES)]
             
             writer.writerow([
                 handle, title, description, 'Atelier Store', cat_name, cat_name + ', Minimalist, Eco, Atelier', 'TRUE',
@@ -81,44 +63,16 @@ with open(products_csv_path, 'w', newline='', encoding='utf-8') as f:
                 'shopify', 50, 'deny',
                 'manual', price, '',
                 'TRUE', 'TRUE', '',
-                img_src, 1, title, 'FALSE', title, 'Comprar ' + title + ' en Atelier Minimal Store.',
+                'FALSE', title, 'Comprar ' + title + ' en Atelier Minimal Store.',
                 'active'
             ])
             prod_id += 1
 
-reviews_csv_path = os.path.join(export_dir, 'shopify_resenas_400_productos.csv')
-with open(reviews_csv_path, 'w', newline='', encoding='utf-8') as f:
-    writer = csv.writer(f)
-    writer.writerow([
-        'product_handle', 'rating', 'title', 'body', 'author', 'email', 'created_at', 'status'
-    ])
-    
-    prod_id = 101
-    for cat_id, cat_name, nouns in categories:
-        for i in range(1, 21):
-            noun = nouns[i % len(nouns)]
-            adj = adjectives[(i + prod_id) % len(adjectives)]
-            clean_noun = noun.lower().replace(' ', '-')
-            clean_adj = adj.lower()
-            handle = cat_id + '-' + clean_noun + '-' + clean_adj + '-' + str(i)
-            
-            for r in range(2):
-                fn = first_names[(i + r) % len(first_names)]
-                ln = last_initials[(i + r*2) % len(last_initials)]
-                author = fn + ' ' + ln
-                email = fn.lower() + ln.lower().replace('.', '') + '@gmail.com'
-                rev_title = review_titles[(i + r) % len(review_titles)]
-                rev_body = review_bodies[(i + r) % len(review_bodies)]
-                rating = 5 if r == 0 else 4
-                
-                writer.writerow([
-                    handle, rating, rev_title, rev_body, author, email, '2026-02-01 10:00:00', 'published'
-                ])
-            prod_id += 1
-
+# Update ZIP
 zip_path = os.path.join(base_dir, 'Archivos_Importacion_Shopify_Atelier.zip')
+reviews_csv_path = os.path.join(export_dir, 'shopify_resenas_400_productos.csv')
 with zipfile.ZipFile(zip_path, 'w', zipfile.ZIP_DEFLATED) as zipf:
-    zipf.write(products_csv_path, os.path.basename(products_csv_path))
+    zipf.write(products_no_img_path, os.path.basename(products_no_img_path))
     zipf.write(reviews_csv_path, os.path.basename(reviews_csv_path))
 
-print("ZIP y CSVs con Image Src corregidos exitosamente.")
+print("CSV sin columnas de imagenes creado exitosamente.")
